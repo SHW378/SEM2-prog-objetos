@@ -2,7 +2,7 @@ public class Empleados {
     private String Nombre;
     private String Apellido;
     private String Cargo;
-    private String Salario;
+    private double Salario;
 
     public String getNombre() {
         return Nombre;
@@ -28,11 +28,11 @@ public class Empleados {
         this.Cargo = Cargo;
     }
 
-    public String getSalario() {
+    public double getSalario() {
         return Salario;
     }
 
-    public void setSalario(String Salario) {
+    public void setSalario(double Salario) {
         this.Salario = Salario;
     }
 }

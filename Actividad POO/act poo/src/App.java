@@ -4,12 +4,12 @@ public class App {
         primerempleado.setNombre("Juan");
         primerempleado.SetApellido("Pérez");
         primerempleado.setCargo("Gerente");
-        primerempleado.setSalario("50000");
+        primerempleado.setSalario(50000);
         Empleados segundoempleado = new Empleados();
         segundoempleado.setNombre("Ana");
         segundoempleado.SetApellido("Gómez");
         segundoempleado.setCargo("Contadora");
-        segundoempleado.setSalario("45000");
+        segundoempleado.setSalario(45000);
         System.out.println("Empleado: " + primerempleado.getNombre() + " " + primerempleado.getApellido() + ", " + primerempleado.getCargo() + ", " + primerempleado.getSalario());
         System.out.println("Empleado: " + segundoempleado.getNombre() + " " + segundoempleado.getApellido() + ", " + segundoempleado.getCargo() + ", " + segundoempleado.getSalario());
     }
