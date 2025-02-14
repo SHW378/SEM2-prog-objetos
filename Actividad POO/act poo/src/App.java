@@ -4,7 +4,7 @@ public class App {
         primerempleado.setNombre("Juan");
         primerempleado.SetApellido("Pérez");
         primerempleado.setCargo("Gerente");
-        primerempleado.setSalario("5000");
+        primerempleado.setSalario("50000");
         Empleados segundoempleado = new Empleados();
         segundoempleado.setNombre("Ana");
         segundoempleado.SetApellido("Gómez");
