@@ -13,8 +13,8 @@ public class Casa { //Definimos la clase
         Casa miCasa = new Casa("Blanco"); //Definimos la instancia miCasa 
         // Llamar al método
         miCasa.mostrarColor(); //Definimos el mensaje mostrarColor
-        Casa otraCasa = new Casa("Verde"); //Definimos la instancia otraCasa
+        Casa otraCasa = new Casa("Verde"); //Dfinimos la instancia otraCasa
         otraCasa.mostrarColor(); //Definimos el mensaje mostrarColor de la instancia otraCasa
-
+        
     }   
 }
