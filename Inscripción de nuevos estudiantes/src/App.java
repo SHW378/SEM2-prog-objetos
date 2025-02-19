@@ -17,17 +17,23 @@ public class App {
             primerEstudiante.setApellido(sc.nextLine());
             System.out.println("Edad: ");
             primerEstudiante.setEdad(Integer.parseInt(sc.nextLine()));
+            String respuesta;
+            while (true) {
             System.out.println("¿El estudiante ha decidido su carrera? (s/n) ");
-            String respuesta = sc.nextLine();
+            respuesta = sc.nextLine();
+            if (respuesta.equals("s") || respuesta.equals("n")) {
+                break;
+            } else {
+                System.out.println("Carácter inválido. Por favor ingrese 's' o 'n'.");
+            }
+        }
             if (respuesta.equals("s")) {
                 System.out.println("Carrera: ");
                 primerEstudiante.setCarrera(sc.nextLine());
                 System.out.println("Se ha inscrito: " + primerEstudiante.getNombre() + " " + primerEstudiante.getApellido() + ", " + primerEstudiante.getEdad() + " años, para la carrera de " + primerEstudiante.getCarrera());
             } else if (respuesta.equals("n")) {
                 System.out.println("Se ha inscrito: " + primerEstudiante.getNombre() + " " + primerEstudiante.getApellido() + ", " + primerEstudiante.getEdad() + " años, aún no ha decidido su carrera");
-            } else {
-                System.out.println("Caracter no válido");
-            }
+            } 
         }
         sc.close();
     }
