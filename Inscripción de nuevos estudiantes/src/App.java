@@ -21,10 +21,10 @@ public class App {
             while (true) {
             System.out.println("¿El estudiante ha decidido su carrera? (s/n) ");
             respuesta = sc.nextLine();
-            if (respuesta.equals("s") || respuesta.equals ("n")) { 
-                break;
+            if (respuesta != "s" && respuesta != "n") {
+                System.out.println("Respuesta incorrecta, ingrese s o n");
             } else {
-                System.out.println("Carácter inválido. Por favor ingrese 's' o 'n'.");
+                break;
             }
         }
             if (respuesta.equals("s")) {
