@@ -15,10 +15,14 @@ public class Calculadora {
     public void suma (float a, float b) {
         System.out.println("La suma es: " + (a + b));
     }
+    public void suma (){
+        System.out.println("La suma es: " + (operador1 + operador2));
+    }
 public static void main(String[] args) {
     Calculadora calculadora = new Calculadora();
     calculadora.suma("abc", "xyz");
-    calculadora.suma(1, 2);
+    calculadora.suma(1, 3);
     calculadora.suma(2.2f, 3.3f);
-}
-}
+    Calculadora otraCalculadora = new Calculadora(10, 20);
+    otraCalculadora.suma();
+}}
