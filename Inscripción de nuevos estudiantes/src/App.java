@@ -1,20 +1,32 @@
 import java.util.Scanner;
-
 public class App {
-    Scanner sc = new Scanner(System.in);
-    public static class Estudiante {
-        private String nombre;
-        private String apellido;
-        private int edad;
-        private String Carrera; 
-        public Estudiante(String nombre, String apellido, int edad, String carrera) {
-            this.nombre = nombre;
-            this.apellido = apellido;
-            this.edad = edad;
-            this.Carrera = carrera;
-        }
-    }
     public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
 
+        System.out.println("¿Cuantos estudiantes desea registrar?");
+        int numeroEstudiantes = Integer.parseInt(sc.nextLine());
+        for (int i = 0; i < numeroEstudiantes; i++) {
+            if (i >= numeroEstudiantes) {
+                break;
+            }
+            System.out.println("ingrese los datos del estudiante " + (i + 1));
+            Estudiante primerEstudiante = new Estudiante();
+            System.out.println("Nombre: ");
+            primerEstudiante.setNombre(sc.nextLine());
+            System.out.println("Apellido: ");
+            primerEstudiante.setApellido(sc.nextLine());
+            System.out.println("Edad: ");
+            primerEstudiante.setEdad(Integer.parseInt(sc.nextLine()));
+            System.out.println("¿El estudiante ha decidido su carrera? (s/n) ");
+            String respuesta = sc.nextLine();
+            if (respuesta.equals("s")) {
+                System.out.println("Carrera: ");
+                primerEstudiante.setCarrera(sc.nextLine());
+                System.out.println("Se ha inscrito: " + primerEstudiante.getNombre() + " " + primerEstudiante.getApellido() + ", " + primerEstudiante.getEdad() + " años, para la carrera de " + primerEstudiante.getCarrera());
+            } else if (respuesta.equals("n")) {
+                System.out.println("Se ha inscrito: " + primerEstudiante.getNombre() + " " + primerEstudiante.getApellido() + ", " + primerEstudiante.getEdad() + " años, aún no ha decidido su carrera");
+            }
+        }
+        sc.close();
     }
 }
