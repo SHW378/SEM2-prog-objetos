@@ -25,6 +25,8 @@ public class App {
                 System.out.println("Se ha inscrito: " + primerEstudiante.getNombre() + " " + primerEstudiante.getApellido() + ", " + primerEstudiante.getEdad() + " años, para la carrera de " + primerEstudiante.getCarrera());
             } else if (respuesta.equals("n")) {
                 System.out.println("Se ha inscrito: " + primerEstudiante.getNombre() + " " + primerEstudiante.getApellido() + ", " + primerEstudiante.getEdad() + " años, aún no ha decidido su carrera");
+            } else {
+                System.out.println("Caracter no válido");
             }
         }
         sc.close();
