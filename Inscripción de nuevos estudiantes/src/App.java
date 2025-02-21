@@ -2,9 +2,17 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
-
+        
+        int numeroEstudiantes = 0;
+        while (true) {
         System.out.println("¿Cuantos estudiantes desea registrar?");
-        int numeroEstudiantes = Integer.parseInt(sc.nextLine());
+        try {
+            numeroEstudiantes = Integer.parseInt(sc.nextLine());
+            break;
+            } catch (NumberFormatException e) {
+                System.out.println("Carácter inválido. Por favor ingrese un número válido.");
+            }
+        }
         for (int i = 0; i < numeroEstudiantes; i++) {
             if (i >= numeroEstudiantes) {
                 break;
