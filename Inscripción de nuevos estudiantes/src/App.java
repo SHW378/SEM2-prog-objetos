@@ -18,7 +18,7 @@ public class App {
                 break;
             }
             System.out.println("ingrese los datos del estudiante " + (i + 1));
-            Estudiante primerEstudiante = new Estudiante();
+            Estudiante primerEstudiante = new Estudiante(null, null, i);
             System.out.println("Nombre: ");
             primerEstudiante.setNombre(sc.nextLine());
             System.out.println("Apellido: ");
@@ -35,12 +35,12 @@ public class App {
                 System.out.println("Carácter inválido. Por favor ingrese 's' o 'n'.");
             }
         }
-            if (respuesta.equals("s")) {
+            if (respuesta.equals("s")){
                 System.out.println("Carrera: ");
                 primerEstudiante.setCarrera(sc.nextLine());
-                System.out.println("Se ha inscrito: " + primerEstudiante.getNombre() + " " + primerEstudiante.getApellido() + ", " + primerEstudiante.getEdad() + " años, para la carrera de " + primerEstudiante.getCarrera());
+                primerEstudiante.imprimirInscripcion();
             } else if (respuesta.equals("n")) {
-                System.out.println("Se ha inscrito: " + primerEstudiante.getNombre() + " " + primerEstudiante.getApellido() + ", " + primerEstudiante.getEdad() + " años, aún no ha decidido su carrera");
+                primerEstudiante.imprimirInscripcionSinCarrera(true);
             } 
         }
         sc.close();
