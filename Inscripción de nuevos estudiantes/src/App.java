@@ -10,7 +10,7 @@ public class App {
             numeroEstudiantes = Integer.parseInt(sc.nextLine());
             break;
             } catch (NumberFormatException e) {
-                System.out.println("Carácter inválido. Por favor ingrese un número válido.");
+                System.out.println("Carácter inválido. Por favor ingrese un carácter válido.");
             }
         }
         for (int i = 0; i < numeroEstudiantes; i++) {
