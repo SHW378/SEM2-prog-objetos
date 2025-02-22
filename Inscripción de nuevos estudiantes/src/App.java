@@ -33,7 +33,7 @@ public class App {
                     if (respuesta.equals("s") || respuesta.equals("n")) {
                         break;
                     }
-                } catch (NumberFormatException e) {
+                } catch (Exception e) {
                     System.out.println("Carácter inválido. Por favor ingrese s o n.");
                 }
         }
