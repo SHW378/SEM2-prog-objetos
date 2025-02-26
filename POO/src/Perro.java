@@ -1,4 +1,4 @@
-public class Perro {
+public class Perro extends Animal {
     private String nombre;
     public String getNombre() {
         return nombre;
@@ -8,5 +8,9 @@ public class Perro {
             throw new IllegalArgumentException("El nombre no puede estar vació");
         }
         this.nombre = nombre;
+    }
+    @Override
+    public void hacerSonido() {
+        System.out.println("El perro ladra");
     }
 }

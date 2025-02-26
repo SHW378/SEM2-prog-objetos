@@ -3,7 +3,7 @@ public class Main {
      Perro perro = new Perro();
      
      //Establece el atributo 'nombre' al perro
-    perro.setNombre(null);    
+    perro.setNombre("julian");    
 
      //Imprime el nombre del perro
     System.out.println(perro.getNombre());
