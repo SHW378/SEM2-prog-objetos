@@ -21,5 +21,13 @@ public class Main {
     //Iteración entre clases
     accion.dormir(perro.getNombre());
     accion.dormir(gato.getNombre());
+
+    Pajaro pajaro = new Pajaro();
+    Avion avion = new Avion();
+
+    //Polimorfismo del método volar
+    pajaro.volar();
+    avion.volar();
+    
     }
 }
