@@ -9,7 +9,7 @@ public abstract class Vehiculos implements Inscribible {
         this.año = año;
     }
     public void Detalles() {
-        System.out.println("Este vehículo es de marca " + marca + ", modelo " + modelo + " y año " + año);
+        System.out.println("Este vehículo es de marca la " + marca + ", modelo " + modelo + " y año " + año);
         if (2025 - año > 20) {
             System.out.println("Es considerado como antiguo");
         } else {
