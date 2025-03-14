@@ -31,13 +31,13 @@ public class Alumno extends Usuario {
     public void modificar(String tipoDato, String valor) {
         switch (tipoDato) {
             case "nombre":
-                setNombre(valor);
+                SetNombre(valor);
                 break;
             case "apellido":
-                setApellido(valor);
+                SetApellido(valor);
                 break;
             case "carrera":
-                setCarrera(valor);
+                SetCarrera(valor);
                 break;
             case "matricula":
                 try {

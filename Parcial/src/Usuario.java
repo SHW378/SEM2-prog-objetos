@@ -4,12 +4,13 @@ public abstract class Usuario implements Administrable {
     private String carrera;
     private String estado;
 
-    public Usuario(String nombre, String apellido, String carrera, String estado) {
+    public Usuario(String nombre, String apellido, String carrera) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.carrera = carrera;
         this.estado = "activo";
     }
+
     public String GetNombre() {
         return nombre;
     }
