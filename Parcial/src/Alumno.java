@@ -1,40 +1,35 @@
-
 public class Alumno extends Usuario {
-    private String matricula;
+    private double matricula;
     private double promedio;
 
-    public Alumno(String nombre, String apellido, String carrera, String matricula, double promedio) {
+    public Alumno(String nombre, String apellido, String carrera, double matricula, double promedio) {
         super(nombre, apellido, carrera);
         this.matricula = matricula;
         this.promedio = promedio;
     }
 
-    public String getMatricula() {
+    public double GetMatricula() {
         return matricula;
     }
-
-    public void setMatricula(String matricula) {
+    public void SetMatricula(double matricula) {
         this.matricula = matricula;
     }
-
-    public double getPromedio() {
+    public double GetPromedio() {
         return promedio;
     }
-
-    public void setPromedio(double promedio) {
+    public void SetPromedio(double promedio) {
         this.promedio = promedio;
     }
-
+    
     @Override
     public void imprimir() {
         super.imprimir();
-        System.out.println("Matrícula: " + matricula);
+        System.out.println("Matricula: " + matricula);
         System.out.println("Promedio: " + promedio);
     }
-
     @Override
     public void modificar(String tipoDato, String valor) {
-        switch (tipoDato.toLowerCase()) {
+        switch (tipoDato) {
             case "nombre":
                 setNombre(valor);
                 break;
@@ -45,18 +40,24 @@ public class Alumno extends Usuario {
                 setCarrera(valor);
                 break;
             case "matricula":
-                setMatricula(valor);
+                try {
+                    double mat = Double.parseDouble(valor);
+                    SetMatricula(mat);
+                } catch (NumberFormatException e) {
+                    System.out.println("Valor no permitido");
+                }
                 break;
             case "promedio":
                 try {
                     double prom = Double.parseDouble(valor);
-                    setPromedio(prom);
+                    SetPromedio(prom);
                 } catch (NumberFormatException e) {
-                    System.out.println("Valor no numérico para promedio.");
+                    System.out.println("Valor no permitido");
                 }
                 break;
             default:
                 System.out.println("No se ha modificado la información del alumno.");
         }
-    }
 }
+}
+
