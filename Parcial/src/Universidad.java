@@ -90,39 +90,31 @@ public class Universidad {
 
     private static void ModificarUsuario() {
         System.out.print("Ingrese el usuario a modificar: ");
-        String nombre = sc.nextLine();
-        boolean encontrado = false;
+        String usuario = sc.nextLine();
         for (Usuario u : usuarios) {
-            if (u.GetNombre() == nombre) {
+            if (u.GetNombre().equalsIgnoreCase(usuario)) {
                 System.out.print( "Ingrese el dato a modificar (nombre, apellido, carrera, matricula/promedio para alumno, asignatura/salario para docente): ");
                 String campo = sc.nextLine();
                 System.out.print("Ingrese el nuevo valor: ");
                 String valor = sc.nextLine();
                 u.modificar(campo, valor);
                 System.out.println("Usuario modificado.");
-                encontrado = true;
                 break;
             }
         }
-        if (!encontrado) {
-            System.out.println("Usuario no encontrado");
-        }
+        System.out.println("Usuario no encontrado");
     }
     
     private static void DesactivarUsuario() {
         System.out.println("ingrese el usuario a desactivar: ");
-        String nombre = sc.nextLine();
-        boolean encontrado = false;
+        String usuario = sc.nextLine();
         for (Usuario u : usuarios) {
-            if (u.GetNombre() == nombre) {
+            if (u.GetNombre().equalsIgnoreCase(usuario)) {
                 u.desactivar();
                 System.out.println("Usuario desactivado.");
-                encontrado = true;
                 break;
             }
         }
-       if (!encontrado) {
-           System.out.println("Usuario no encontrado");
-       }
+        System.out.println("Usuario no encontrado");
     }
 }
