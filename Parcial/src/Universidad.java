@@ -92,7 +92,7 @@ public class Universidad {
         System.out.print("Ingrese el usuario a modificar: ");
         String usuario = sc.nextLine();
         for (Usuario u : usuarios) {
-            if (u.GetNombre() ==(usuario)) {
+            if (u.GetNombre() == (usuario)) {
                 System.out.print( "Ingrese el dato a modificar (nombre, apellido, carrera, matricula/promedio para alumno, asignatura/salario para docente): ");
                 String campo = sc.nextLine();
                 System.out.print("Ingrese el nuevo valor: ");
