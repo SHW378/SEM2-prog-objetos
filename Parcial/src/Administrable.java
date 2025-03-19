@@ -1,4 +1,4 @@
 public interface Administrable {
-    void modificar(String tipoDato, String valor);
-    void desactivar();
+    public void modificar(String tipoDato, String valor);
+    public void desactivar();
 }
