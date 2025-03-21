@@ -6,20 +6,19 @@ public class App {
         System.out.print("Ingrese la cantidad de números: ");
         int cantidad = sc.nextInt();
         double suma = 0;
+        String decision;
 
-        for (int i = 0; i < cantidad; i++) {
+        do {
             System.out.print("Ingrese un número: ");
             double numero = sc.nextDouble();
             suma += numero;
+            System.out.println("desea ingresar otro numero? (s/n)");
+            decision = sc.next();
+        } while (decision.equals("s"));
+        
+        if (decision.equals("n")) {
+            System.out.println("Promedio: " + suma / cantidad);
         }
-
-        if (cantidad > 0) {
-            double promedio = suma / cantidad;
-            System.out.println("El promedio de los números ingresados es: " + promedio);
-        } else {
-            System.out.println("No se ingresaron números.");
-        }
-
         sc.close();
     }
 }
