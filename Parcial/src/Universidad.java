@@ -104,7 +104,7 @@ public class Universidad {
         String nombreUsuario = sc.nextLine();
         boolean encontrado = false;
         for (int i = 0; i < usuarioCount; i++) {
-            if (usuarios[i].GetNombre().equalsIgnoreCase(nombreUsuario)) {
+            if (usuarios[i].GetNombre() == (nombreUsuario)) {
                 System.out.print("Ingrese el dato a modificar (nombre, apellido, carrera, matricula/promedio para alumno, asignatura/salario para docente): ");
                 String campo = sc.nextLine();
                 System.out.print("Ingrese el nuevo valor: ");
@@ -125,7 +125,7 @@ public class Universidad {
         String nombreUsuario = sc.nextLine();
         boolean encontrado = false;
         for (int i = 0; i < usuarioCount; i++) {
-            if (usuarios[i].GetNombre().equalsIgnoreCase(nombreUsuario)) {
+            if (usuarios[i].GetNombre() == (nombreUsuario)) {
                 usuarios[i].desactivar();
                 System.out.println("Usuario desactivado.");
                 encontrado = true;
