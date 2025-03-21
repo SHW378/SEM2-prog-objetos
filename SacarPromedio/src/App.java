@@ -15,7 +15,7 @@ public class App {
                 try {
                     System.out.println("Ingrese un número: ");
                     numero = sc.nextDouble();
-                    if (numero <= -1) {
+                    if (numero < 0) {
                         System.out.println("Error: ingrese un número positivo");
                     } else {
                         caracterValido = true;
