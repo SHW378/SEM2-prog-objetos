@@ -3,8 +3,7 @@ public class BibliotecaApp {
         Autor autor1 = new Autor("Cesar", "Mexicano");
         Libro libro1 = new Libro("El libro sobre mi", autor1, "978-1-2345-6789-0");
 
-        Autor autor2 = new Autor("Alberto", "Mexicano");
-        Libro libro2 = new Libro("El libro sobre mi 2", autor2, "978-1-2345-6789-0");
+        Libro libro2 = new Libro("El libro sobre mi 2", autor1, "978-1-2345-6789-0");
 
         System.out.println("Libro: " + libro1.getTitulo());
         System.out.println("Autor: " + libro1.getAutor().getNombre());
