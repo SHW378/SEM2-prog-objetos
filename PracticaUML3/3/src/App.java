@@ -6,7 +6,7 @@ public class App {
         Sucursal sucursal2 = new Sucursal(2, "Norte");
         Sucursal sucursal3 = new Sucursal(3, "Oeste");
         Sucursal sucursal4 = new Sucursal(4, "Sur");
-        Sucursal sucursal5 =new Sucursal(5, "Este");
+        Sucursal sucursal5 = new Sucursal(5, "Este");
 
         banco.agregarSucursal(sucursal1);
         banco.agregarSucursal(sucursal2);
