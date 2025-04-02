@@ -66,7 +66,7 @@ public class App {
                 break;
             } catch (Exception e) {
                 System.out.println("Entrada inválida. Intente de nuevo.");
-                scanner.nextLine(); // Limpiar el buffer del scanner
+                scanner.nextLine();
             }
         }
     }
@@ -99,7 +99,7 @@ public class App {
                 break;
             } catch (Exception e) {
                 System.out.println("Entrada inválida. Intente de nuevo.");
-                scanner.nextLine(); // Limpiar el buffer del scanner
+                scanner.nextLine();
             }
         }
     }
