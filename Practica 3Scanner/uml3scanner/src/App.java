@@ -119,7 +119,6 @@ public class App {
         Banco banco = new Banco(nombreBanco);
         App app = new App(banco);
         app.iniciar();
-    
-        
+        scanner.close();
     }    
 }
