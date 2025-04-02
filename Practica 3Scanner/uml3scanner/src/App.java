@@ -53,7 +53,7 @@ public class App {
     private void agregarSucursal() {
         System.out.print("Ingrese el ID de la sucursal: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
+        scanner.nextLine();
         System.out.print("Ingrese el nombre de la sucursal: ");
         String nombre = scanner.nextLine();
 
