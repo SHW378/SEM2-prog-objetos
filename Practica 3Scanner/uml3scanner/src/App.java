@@ -51,6 +51,8 @@ public class App {
     }
 
     private void agregarSucursal() {
+        while (true){
+        try {
         System.out.print("Ingrese el ID de la sucursal: ");
         int id = scanner.nextInt();
         scanner.nextLine();
@@ -61,9 +63,17 @@ public class App {
         if (banco.agregarSucursal(sucursal)) {
             System.out.println("Sucursal agregada exitosamente.");
         }
+        break;
+    } catch (Exception e) {
+        System.out.println("Entrada inválida. Intente de nuevo.");
+        scanner.nextLine(); // Limpiar el buffer del scanner
     }
+}
+}
 
     private void agregarEmpleadoASucursal() {
+        while(true){
+        try {
         System.out.print("Ingrese el ID de la sucursal: ");
         int idSucursal = scanner.nextInt();
         scanner.nextLine();
@@ -86,13 +96,21 @@ public class App {
         if (sucursal.agregarEmpleado(empleado)) {
             System.out.println("Empleado agregado exitosamente a la sucursal " + sucursal.getNombre());
         }
+        break;
+        } catch (Exception e) {
+            System.out.println("Entrada inválida. Intente de nuevo.");
+            scanner.nextLine(); // Limpiar el buffer del scanner
+        }
     }
+}
 
     private void mostrarSucursales() {
         banco.mostrarSucursales();
     }
 
     private void mostrarEmpleadosDeSucursal() {
+        while (true) {
+        try {
         System.out.print("Ingrese el ID de la sucursal: ");
         int idSucursal = scanner.nextInt();
         scanner.nextLine();
@@ -102,8 +120,14 @@ public class App {
             sucursal.mostrarEmpleados();
         } else {
             System.out.println("Sucursal con ID " + idSucursal + " no encontrada.");
+        } 
+        break;
+        } catch (Exception e) {
+            System.out.println("Error: Entrada inválida");
+            scanner.nextLine(); 
         }
     }
+}
 
     public static void main(String[] args) {
         System.out.print("Ingrese el nombre del banco: ");
