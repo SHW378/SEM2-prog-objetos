@@ -40,7 +40,6 @@ public class App {
         scanner.close();
     }
 
-    // Método para mostrar el menú
     private void mostrarMenu() {
         System.out.println("\n*SISTEMA BANCARIO*");
         System.out.println("1.) Agregar una sucursal");
@@ -51,7 +50,6 @@ public class App {
         System.out.print("Seleccione una opción: ");
     }
 
-    // Método para agregar una sucursal
     private void agregarSucursal() {
         System.out.print("Ingrese el ID de la sucursal: ");
         int id = scanner.nextInt();
@@ -65,11 +63,10 @@ public class App {
         }
     }
 
-    // Método para agregar un empleado a una sucursal
     private void agregarEmpleadoASucursal() {
         System.out.print("Ingrese el ID de la sucursal: ");
         int idSucursal = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
+        scanner.nextLine();
 
         Sucursal sucursal = banco.buscarSucursal(idSucursal);
         if (sucursal == null) {
@@ -91,16 +88,14 @@ public class App {
         }
     }
 
-    // Método para mostrar sucursales
     private void mostrarSucursales() {
         banco.mostrarSucursales();
     }
 
-    // Método para mostrar empleados de una sucursal
     private void mostrarEmpleadosDeSucursal() {
         System.out.print("Ingrese el ID de la sucursal: ");
         int idSucursal = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
+        scanner.nextLine();
 
         Sucursal sucursal = banco.buscarSucursal(idSucursal);
         if (sucursal != null) {
@@ -110,7 +105,6 @@ public class App {
         }
     }
 
-    // Método main
     public static void main(String[] args) {
         System.out.print("Ingrese el nombre del banco: ");
         Scanner scanner = new Scanner(System.in);
