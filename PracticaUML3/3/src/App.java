@@ -26,7 +26,7 @@ public class App {
         sucursal1.agregarEmpleado(empleado4);
         sucursal1.agregarEmpleado(empleado5);
 
-        System.out.println("Nombre del Banco; " + banco.getNombre());
+        System.out.println("Nombre del Banco: " + banco.getNombre());
         sucursal1.mostrarEmpleados();
         sucursal2.mostrarEmpleados();
         sucursal3.mostrarEmpleados();
