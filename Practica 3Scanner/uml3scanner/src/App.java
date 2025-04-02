@@ -76,7 +76,7 @@ public class App {
 
         System.out.print("Ingrese el ID del empleado: ");
         int idEmpleado = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
+        scanner.nextLine(); 
         System.out.print("Ingrese el nombre del empleado: ");
         String nombre = scanner.nextLine();
         System.out.print("Ingrese el puesto del empleado: ");
