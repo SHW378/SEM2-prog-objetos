@@ -20,6 +20,10 @@ public class Pila {
         int elemento = pila.pop();
         System.out.println("El elemento extraido es: " + elemento);
         System.out.println("El elemento de la cima es: "+ pila.peek());
+        System.out.println("El elemento extraido es: " + pila.pop());
+        System.out.println("El elemento de la cima es: "+ pila.peek());
+        System.out.println("El elemento extraido es: " + pila.pop());
+        System.out.println("¿La pila está vacia?: " + pila.isEmpty());
 
     }
 }
