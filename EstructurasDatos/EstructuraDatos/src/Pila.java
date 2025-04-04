@@ -23,6 +23,7 @@ public class Pila {
         System.out.println("El elemento extraido es: " + pila.pop());
         System.out.println("El elemento de la cima es: "+ pila.peek());
         System.out.println("El elemento extraido es: " + pila.pop());
+        // volver a verificar si está vacia
         System.out.println("¿La pila está vacia?: " + pila.isEmpty());
 
     }
