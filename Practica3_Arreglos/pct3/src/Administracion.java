@@ -43,24 +43,35 @@ public class Administracion{
         System.out.print("Ingrese el saldo inicial: ");
         double saldoInicial = scanner.nextDouble();
         
-        System.out.print("Tipo de cuenta (1. Ahorros / 2. Corriente): ");
+        System.out.print("Seleccione el tipo de cuenta: ");
+        System.out.println("1. Ahorros");
+        System.out.println("2. Corriente");
         int tipoCuenta = scanner.nextInt();
         scanner.nextLine();
 
-        String tipo = (tipoCuenta == 1) ? "Ahorros" : "Corriente";
 
-        scanner.nextLine();
+        String tipoCuentaStr;
+        if (tipoCuenta == 2) {
+            tipoCuentaStr = "Corriente";
+        } else if (tipoCuenta == 1) {
+            tipoCuentaStr = "Ahorros";
+        } else {
+            System.out.println("Error: Tipo de cuenta no válido. Se asignará 'Ahorros' por defecto.");
+            tipoCuentaStr = "Ahorros";
+        }
 
-        Cuenta nuevaCuenta = new Cuenta(numeroCuenta, titular, saldoInicial, tipo);
+        Cuenta nuevaCuenta = new Cuenta(numeroCuenta, titular, saldoInicial, tipoCuentaStr);
         cuentas.add(nuevaCuenta);
 
         System.out.println("Cuenta creada exitosamente.");
+        System.out.println("Número de cuenta: " + nuevaCuenta.getNumeroCuenta() + ", Titular: " + nuevaCuenta.getTitular() + ", Saldo inicial: " + nuevaCuenta.getSaldo() + ", Tipo de cuenta: " + nuevaCuenta.getTipoCuenta());
     }
 
     public void depositarDinero(Scanner scanner) {
         System.out.println("\n=== DEPOSITAR DINERO ===");
-        System.out.print("Número de cuenta: ");
+        System.out.print("Ingrese el número de cuenta: ");
         String numeroCuenta = scanner.nextLine();
+        System.out.println("Numero de cuenta: " + numeroCuenta + ", Titular: " + buscarCuenta(numeroCuenta).getTitular() + ", Saldo: " + buscarCuenta(numeroCuenta).getSaldo() + ", Tipo de cuenta: " + buscarCuenta(numeroCuenta).getTipoCuenta());  
 
         Cuenta cuenta = buscarCuenta(numeroCuenta);
         if (cuenta == null) {
@@ -68,7 +79,7 @@ public class Administracion{
             return;
         }
 
-        System.out.print("Monto a depositar: ");
+        System.out.print("Ingrese el monto a depositar: ");
         double monto = scanner.nextDouble();
         scanner.nextLine();
 
@@ -86,13 +97,15 @@ public class Administracion{
         Movimiento movimiento = new Movimiento(operacion, saldoAnterior, cuenta.getSaldo());
         pilaMovimientos.push(movimiento);
 
-        System.out.println("Depósito realizado con éxito. Nuevo saldo: " + cuenta.getSaldo());
+        System.out.println("Depósito realizado exitosamente. ");
+        System.out.println("Nuevo saldo: " + "Número de cuenta: " + numeroCuenta + ", Titular: " + cuenta.getTitular() + ", Saldo: " + cuenta.getSaldo() + ", Tipo de cuenta: " + cuenta.getTipoCuenta());
     }
 
     public void retirarDinero(Scanner scanner) {
         System.out.println("\n=== RETIRAR DINERO ===");
-        System.out.print("Número de cuenta: ");
+        System.out.print("Ingrese el número de cuenta: ");
         String numeroCuenta = scanner.nextLine();
+        System.out.println("Numero de cuenta: " + numeroCuenta + ", Titular: " + buscarCuenta(numeroCuenta).getTitular() + ", Saldo: " + buscarCuenta(numeroCuenta).getSaldo() + ", Tipo de cuenta: " + buscarCuenta(numeroCuenta).getTipoCuenta());
 
         Cuenta cuenta = buscarCuenta(numeroCuenta);
         if (cuenta == null) {
@@ -123,13 +136,15 @@ public class Administracion{
         Movimiento movimiento = new Movimiento(operacion, saldoAnterior, cuenta.getSaldo());
         pilaMovimientos.push(movimiento);
 
-        System.out.println("Retiro realizado con éxito. Nuevo saldo: " + cuenta.getSaldo());
+        System.out.println("Retiro realizado exitosamente. ");
+        System.out.println("Número de cuenta: " + numeroCuenta + ", Titular: " + cuenta.getTitular() + ", Saldo: " + cuenta.getSaldo() + ", Tipo de cuenta: " + cuenta.getTipoCuenta());
     }
 
     public void transferirDinero(Scanner scanner) {
         System.out.println("\n=== TRANSFERIR DINERO ===");
-        System.out.print("Número de cuenta origen: ");
+        System.out.print("Ingrese el número de cuenta origen: ");
         String cuentaOrigen = scanner.nextLine();
+        System.out.println("Numero de cuenta origen: " + cuentaOrigen + ", Titular: " + buscarCuenta(cuentaOrigen).getTitular() + ", Saldo: " + buscarCuenta(cuentaOrigen).getSaldo() + ", Tipo de cuenta: " + buscarCuenta(cuentaOrigen).getTipoCuenta());
 
         Cuenta origen = buscarCuenta(cuentaOrigen);
         if (origen == null) {
@@ -139,6 +154,7 @@ public class Administracion{
 
         System.out.print("Número de cuenta destino: ");
         String cuentaDestino = scanner.nextLine();
+        System.out.println("Numero de cuenta destino: " + cuentaDestino + ", Titular: " + buscarCuenta(cuentaDestino).getTitular() + ", Saldo: " + buscarCuenta(cuentaDestino).getSaldo() + ", Tipo de cuenta: " + buscarCuenta(cuentaDestino).getTipoCuenta());
 
         Cuenta destino = buscarCuenta(cuentaDestino);
         if (destino == null) {
@@ -177,45 +193,92 @@ public class Administracion{
         Movimiento movimiento = new Movimiento(operacion, saldoAnteriorOrigen, origen.getSaldo(), saldoAnteriorDestino, destino.getSaldo());
         pilaMovimientos.push(movimiento);
 
-        System.out.println("Transferencia realizada con éxito.");
-        System.out.println("Nuevo saldo cuenta origen: " + origen.getSaldo());
-        System.out.println("Nuevo saldo cuenta destino: " + destino.getSaldo());
+        System.out.println("Transferencia realizada exitosamente.");
+        System.out.println("Cuenta Origen: " + "Número:" + cuentaOrigen + ", Titular: " + origen.getTitular() + ", Saldo: " + origen.getSaldo() + ", Tipo de cuenta: " + origen.getTipoCuenta());
+        System.out.println("Cuenta Destino: " + "Número:" + cuentaDestino + ", Titular: " + destino.getTitular() + ", Saldo: " + destino.getSaldo() + ", Tipo de cuenta: " + destino.getTipoCuenta());
     }
 
-    public void deshacerMovimiento() {
+    public void deshacerMovimiento(Scanner scanner) {
+        System.out.println("\n=== DESHACER ÚLTIMO MOVIMIENTO ===");
         if (pilaMovimientos.isEmpty()) {
             System.out.println("No hay movimientos para deshacer.");
             return;
         }
-
-        Movimiento ultimoMovimiento = pilaMovimientos.pop();
-        Operacion operacion = ultimoMovimiento.getOperacion();
-
+    
+        System.out.println("\n--- MOVIMIENTOS DISPONIBLES PARA DESHACER ---");
+        Stack<Movimiento> pilaTemporal = new Stack<>();
+        int index = 1;
+    
+        // Mostrar los movimientos disponibles
+        while (!pilaMovimientos.isEmpty()) {
+            Movimiento movimiento = pilaMovimientos.pop();
+            pilaTemporal.push(movimiento);
+            System.out.println(index + ". " + movimiento.getOperacion().getTipo() + " - Cuenta origen: " + movimiento.getOperacion().getCuentaOrigen() +
+                    (movimiento.getOperacion().getCuentaDestino() != null ? ", Cuenta destino: " + movimiento.getOperacion().getCuentaDestino() : ""));
+            index++;
+        }
+    
+        // Restaurar la pila original
+        while (!pilaTemporal.isEmpty()) {
+            pilaMovimientos.push(pilaTemporal.pop());
+        }
+    
+        System.out.print("Seleccione el número del movimiento que desea deshacer: ");
+        int opcion = scanner.nextInt();
+        scanner.nextLine(); // Limpiar el buffer
+    
+        if (opcion < 1 || opcion >= index) {
+            System.out.println("Opción no válida.");
+            return;
+        }
+    
+        // Extraer el movimiento seleccionado
+        Movimiento movimientoSeleccionado = null;
+        for (int i = 1; i <= opcion; i++) {
+            movimientoSeleccionado = pilaMovimientos.pop();
+            if (i < opcion) {
+                pilaTemporal.push(movimientoSeleccionado);
+            }
+        }
+    
+        // Restaurar los movimientos no seleccionados
+        while (!pilaTemporal.isEmpty()) {
+            pilaMovimientos.push(pilaTemporal.pop());
+        }
+    
+        System.out.print("¿Está seguro de que desea deshacer este movimiento? (S/N): ");
+        String confirmacion = scanner.nextLine();
+    
+        if (!confirmacion.equalsIgnoreCase("S")) {
+            System.out.println("Operación cancelada.");
+            pilaMovimientos.push(movimientoSeleccionado); // Restaurar el movimiento si no se confirma
+            return;
+        }
+    
+        Operacion operacion = movimientoSeleccionado.getOperacion();
         Cuenta cuentaOrigen = buscarCuenta(operacion.getCuentaOrigen());
-
+    
         if (operacion.getTipo().equals("Transferencia")) {
             Cuenta cuentaDestino = buscarCuenta(operacion.getCuentaDestino());
-
-            cuentaOrigen.setSaldo(ultimoMovimiento.getSaldoAnteriorOrigen());
-            cuentaDestino.setSaldo(ultimoMovimiento.getSaldoAnteriorDestino());
-
-            System.out.println("Transferencia deshecha. Se revirtieron los saldos de las cuentas.");
+            cuentaOrigen.setSaldo(movimientoSeleccionado.getSaldoAnteriorOrigen());
+            cuentaDestino.setSaldo(movimientoSeleccionado.getSaldoAnteriorDestino());
         } else {
-            cuentaOrigen.setSaldo(ultimoMovimiento.getSaldoAnteriorOrigen());
-            System.out.println(operacion.getTipo() + " deshecho. Se revirtió el saldo de la cuenta.");
+            cuentaOrigen.setSaldo(movimientoSeleccionado.getSaldoAnteriorOrigen());
         }
-
+    
         historialOperaciones.remove(historialOperaciones.size() - 1);
+        System.out.println("Operación deshecha exitosamente.");
+        
     }
 
+    
     public void mostrarEstado() {
-        System.out.println("\n===== ESTADO DEL SISTEMA =====");
-        System.out.println("\n--- CUENTAS ---");
+        System.out.println("\n--- Listado de cuentas ---");
         if (cuentas.isEmpty()) {
             System.out.println("No hay cuentas registradas.");
         } else {
             for (Cuenta cuenta : cuentas) {
-                System.out.println(cuenta);
+                System.out.println("Cuenta [" + "Número de cuenta: " + cuenta.getNumeroCuenta() + ", Titular: " + cuenta.getTitular() + ", Saldo: " + cuenta.getSaldo() + ", Tipo de cuenta: " + cuenta.getTipoCuenta()+  "]");
             }
         }
 
@@ -228,15 +291,36 @@ public class Administracion{
             }
         }
 
-        System.out.println("\n--- PILA DE MOVIMIENTOS PARA DESHACER ---");
+        System.out.println("\nOperaciones recientes disponibles para deshacer:");
         if (pilaMovimientos.isEmpty()) {
-            System.out.println("No hay movimientos en la pila.");
+            System.out.println("No hay movimientos recientes.");
         } else {
-            System.out.println("Número de movimientos en pila: " + pilaMovimientos.size());
-            System.out.println("Último movimiento: " + pilaMovimientos.peek().getOperacion());
+            Stack<Movimiento> pilaTemporal = new Stack<>();
+            boolean hayRetirosODepositos = false;
+    
+            while (!pilaMovimientos.isEmpty()) {
+                Movimiento movimiento = pilaMovimientos.pop();
+                pilaTemporal.push(movimiento);
+    
+                // Filtrar solo retiros y depósitos
+                String tipoOperacion = movimiento.getOperacion().getTipo();
+                if (tipoOperacion.equals("Retiro") || tipoOperacion.equals("Depósito")) {
+                    System.out.println("- " + tipoOperacion + " en la cuenta " + movimiento.getOperacion().getCuentaOrigen() +
+                            ", Monto: " + movimiento.getOperacion().getMonto());
+                    hayRetirosODepositos = true;
+                }
+            }
+    
+            // Restaurar la pila original
+            while (!pilaTemporal.isEmpty()) {
+                pilaMovimientos.push(pilaTemporal.pop());
+            }
+    
+            if (!hayRetirosODepositos) {
+                System.out.println("No hay retiros ni depósitos recientes para deshacer.");
+            }
         }
     }
-
     public Cuenta buscarCuenta(String numeroCuenta) {
         for (Cuenta cuenta : cuentas) {
             if (cuenta.getNumeroCuenta().equals(numeroCuenta)) {

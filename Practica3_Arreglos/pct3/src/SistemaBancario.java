@@ -32,7 +32,7 @@ public class SistemaBancario {
                     admin.transferirDinero(scanner);
                     break;
                 case 5:
-                    admin.deshacerMovimiento();
+                    admin.deshacerMovimiento(scanner);
                     break;
                 case 6:
                     admin.mostrarEstado();
