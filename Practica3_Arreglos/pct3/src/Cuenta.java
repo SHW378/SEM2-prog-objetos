@@ -1,8 +1,8 @@
-class Cuenta {
+public class Cuenta {
     private String numeroCuenta;
     private String titular;
     private double saldo;
-    private String tipoCuenta; // "Ahorros" o "Corriente"
+    private String tipoCuenta; 
     
     public Cuenta(String numeroCuenta, String titular, double saldo, String tipoCuenta) {
         this.numeroCuenta = numeroCuenta;

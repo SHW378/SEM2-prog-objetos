@@ -1,8 +1,8 @@
 class Operacion {
-    private String tipo; // "Depósito", "Retiro", "Transferencia"
+    private String tipo; 
     private double monto;
     private String cuentaOrigen;
-    private String cuentaDestino; // Solo para transferencias
+    private String cuentaDestino; 
     private String fecha;
     
     public Operacion(String tipo, double monto, String cuentaOrigen, String cuentaDestino) {
@@ -14,8 +14,7 @@ class Operacion {
     }
     
     private String obtenerFechaActual() {
-        // Método simple para obtener fecha actual sin usar la clase Date
-        return "Fecha actual"; // En una implementación real, se usaría alguna lógica para la fecha
+        return "Fecha actual"; 
     }
     
     public String getTipo() {

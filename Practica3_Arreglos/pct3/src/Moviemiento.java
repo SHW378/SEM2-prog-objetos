@@ -5,7 +5,6 @@ class Movimiento {
     private double saldoAnteriorDestino;
     private double saldoNuevoDestino;
     
-    // Constructor para depósitos y retiros
     public Movimiento(Operacion operacion, double saldoAnteriorOrigen, double saldoNuevoOrigen) {
         this.operacion = operacion;
         this.saldoAnteriorOrigen = saldoAnteriorOrigen;
@@ -14,7 +13,6 @@ class Movimiento {
         this.saldoNuevoDestino = 0;
     }
     
-    // Constructor para transferencias
     public Movimiento(Operacion operacion, double saldoAnteriorOrigen, double saldoNuevoOrigen,
                       double saldoAnteriorDestino, double saldoNuevoDestino) {
         this.operacion = operacion;

@@ -209,7 +209,6 @@ public class Administracion{
         Stack<Movimiento> pilaTemporal = new Stack<>();
         int index = 1;
     
-        // Mostrar los movimientos disponibles
         while (!pilaMovimientos.isEmpty()) {
             Movimiento movimiento = pilaMovimientos.pop();
             pilaTemporal.push(movimiento);
@@ -218,21 +217,19 @@ public class Administracion{
             index++;
         }
     
-        // Restaurar la pila original
         while (!pilaTemporal.isEmpty()) {
             pilaMovimientos.push(pilaTemporal.pop());
         }
     
         System.out.print("Seleccione el número del movimiento que desea deshacer: ");
         int opcion = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
+        scanner.nextLine(); 
     
         if (opcion < 1 || opcion >= index) {
             System.out.println("Opción no válida.");
             return;
         }
     
-        // Extraer el movimiento seleccionado
         Movimiento movimientoSeleccionado = null;
         for (int i = 1; i <= opcion; i++) {
             movimientoSeleccionado = pilaMovimientos.pop();
@@ -241,7 +238,6 @@ public class Administracion{
             }
         }
     
-        // Restaurar los movimientos no seleccionados
         while (!pilaTemporal.isEmpty()) {
             pilaMovimientos.push(pilaTemporal.pop());
         }
@@ -251,7 +247,7 @@ public class Administracion{
     
         if (!confirmacion.equalsIgnoreCase("S")) {
             System.out.println("Operación cancelada.");
-            pilaMovimientos.push(movimientoSeleccionado); // Restaurar el movimiento si no se confirma
+            pilaMovimientos.push(movimientoSeleccionado); 
             return;
         }
     
@@ -302,7 +298,6 @@ public class Administracion{
                 Movimiento movimiento = pilaMovimientos.pop();
                 pilaTemporal.push(movimiento);
     
-                // Filtrar solo retiros y depósitos
                 String tipoOperacion = movimiento.getOperacion().getTipo();
                 if (tipoOperacion.equals("Retiro") || tipoOperacion.equals("Depósito")) {
                     System.out.println("- " + tipoOperacion + " en la cuenta " + movimiento.getOperacion().getCuentaOrigen() +
@@ -311,7 +306,6 @@ public class Administracion{
                 }
             }
     
-            // Restaurar la pila original
             while (!pilaTemporal.isEmpty()) {
                 pilaMovimientos.push(pilaTemporal.pop());
             }
