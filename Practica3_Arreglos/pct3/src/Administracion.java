@@ -299,7 +299,7 @@ public class Administracion{
                 pilaTemporal.push(movimiento);
     
                 String tipoOperacion = movimiento.getOperacion().getTipo();
-                if (tipoOperacion.equals("Retiro") || tipoOperacion.equals("Depósito")) {
+                if (tipoOperacion.equals("Retiro") || tipoOperacion.equals("Depósito") || tipoOperacion.equals("Transferencia")) {
                     System.out.println("- " + tipoOperacion + " en la cuenta " + movimiento.getOperacion().getCuentaOrigen() +
                             ", Monto: " + movimiento.getOperacion().getMonto());
                     hayRetirosODepositos = true;
