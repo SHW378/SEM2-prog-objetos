@@ -43,7 +43,7 @@ public class Administracion{
         System.out.print("Ingrese el saldo inicial: ");
         double saldoInicial = scanner.nextDouble();
         
-        System.out.print("Seleccione el tipo de cuenta: ");
+        System.out.println("Seleccione el tipo de cuenta: ");
         System.out.println("1. Ahorros");
         System.out.println("2. Corriente");
         int tipoCuenta = scanner.nextInt();
