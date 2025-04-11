@@ -39,9 +39,62 @@ public class ListaEnlazadaSimple {
     public void imprimirLista() {
         Nodo nodoActual = cabecera;
         while (nodoActual != null){
-            System.out.println(nodoActual.dato + " -> ");
+            System.out.print(nodoActual.dato + " -> ");
             nodoActual = nodoActual.puntero;
         }
         System.out.print("null");
+    }
+
+    // Método para eliminar un elemento del inicio de la lista 
+    public int eliminarDelInicio(){
+        if (cabecera != null){
+            Nodo nodoTemporal = cabecera;
+            cabecera = cabecera.puntero;
+            return nodoTemporal.dato;
+        } else {
+            System.out.println("Lista está vacia.");
+            // Vañor númerico para indicar que está vacio
+            return Integer.MIN_VALUE;
+        }
+    }    
+
+    // Método para eliminar el último elemento de la lista
+    public int eliminarDelFinal() {
+        if (cabecera == null) {
+            System.out.println("Lista está vacia");
+            // Valor numerico para indicar que est´´a vacio
+            return Integer.MIN_VALUE;
+        } else if (cabecera.puntero == null) {
+            //Solo hay un nodo
+            int dato = cabecera.dato;
+            cabecera = null;
+            return dato;
+        } else {
+            //Har más de un nodo
+            Nodo nodoTemporal = cabecera;
+            Nodo nodoPenultimo = null;
+            while (nodoTemporal.puntero != null){
+                nodoPenultimo = nodoTemporal;
+                nodoTemporal = nodoTemporal.puntero;   
+            }
+            nodoPenultimo.puntero = null;
+            return nodoTemporal.dato;
+        }
+    }
+
+    public static void main(String[] args) {
+        ListaEnlazadaSimple lista= new ListaEnlazadaSimple();
+        lista.agregarAlfinal(2);
+        lista.agregarAlfinal(3);
+        lista.agregarAlInicio(1);
+        System.out.println("Elementos de la lista");
+        lista.imprimirLista();
+        System.out.println();
+        lista.eliminarDelInicio();
+        lista.eliminarDelFinal();
+        System.out.println("Elementos de la lista");
+        lista.imprimirLista();
+        System.out.println();
+        System.out.println("¿Está vacia?: " + lista.estaVacia());
     }
 }

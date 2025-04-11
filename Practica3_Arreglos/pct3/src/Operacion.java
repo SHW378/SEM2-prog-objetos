@@ -1,4 +1,4 @@
-class Operacion {
+public class Operacion {
     private String tipo; 
     private double monto;
     private String cuentaOrigen;
