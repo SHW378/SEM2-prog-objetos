@@ -15,12 +15,14 @@ public class ListaQueue {
         // Observando el frente de la cola sin removerlo
         System.out.println("Elemento al frente de la cola: " + cola.peek());
 
-        // Removiendo el elemento al frente de la cola (desencolar)
-        System.out.println("Elemento desencolado de la cola: " + cola.poll());
+        System.out.println(cola);
 
+        // Removiendo el elemento al frente de la cola (desencolar)
+        System.out.println("Elemento desencolado de la cola: " + cola.poll()); 
 
         // Verificar si la cola está vacía
         System.out.println("¿La cola está vacía?: " + cola.isEmpty());
 
+        System.out.println(cola);
     }
 }
