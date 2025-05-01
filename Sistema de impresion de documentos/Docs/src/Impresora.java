@@ -25,14 +25,14 @@ public void AgregarCola() {
         System.out.println("Número de páginas: ");
         try {
             numerodepaginas = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer
+            scanner.nextLine(); 
             if (numerodepaginas <= 0) {
                 throw new Exception("Número de páginas no válido. Debe ser mayor a 0.");
             }
-            validInput = true; // Entrada válida
+            validInput = true; 
         } catch (InputMismatchException e) {
-            System.out.println("Error: Debe ingresar un número entero.");
-            scanner.nextLine(); // Limpiar el buffer
+            System.out.println("Opción invalida. Ingrese un valor entero.");
+            scanner.nextLine(); 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -42,7 +42,7 @@ public void AgregarCola() {
     System.out.print("Opción: ");
     int Opcion = scanner.nextInt();
     String tipo = null;
-    scanner.nextLine(); // Limpiar el buffer
+    scanner.nextLine();
     try {
         if (Opcion != 1 && Opcion != 2) {
             throw new Exception("Opción no válida");

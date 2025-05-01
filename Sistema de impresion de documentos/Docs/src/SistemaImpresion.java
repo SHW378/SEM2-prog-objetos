@@ -15,7 +15,6 @@ public class SistemaImpresion {
             System.out.println("5. Mostrar estado");
             System.out.println("6. Salir");
             System.out.print("Seleccione una opcion: ");
-            // Leer la opción del usuario
             
             int Opcion;
             Opcion = scanner.nextInt();

@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 public class Historial {
 
     private Pendiente pendiente;
@@ -10,7 +10,7 @@ public class Historial {
     }
 
 
-    ArrayList<Documento> Historial = new ArrayList<>();
+    LinkedList<Documento> Historial = new LinkedList<>();
     public void AgregarHistorial(Documento documento) {
         Historial.add(documento);
     }
