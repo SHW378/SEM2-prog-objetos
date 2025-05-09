@@ -40,16 +40,37 @@ public class ListaDobleEnlazada {
     }
 
     // Método para imprimir los elementos de la lista
-    public void imprimirLista() {
+    public void imprimirListaInicioAFin() {
+        if (estaVacia()) {
+            System.out.println("null");
+            return;
+        }
+        System.out.print("null <-> ");
         Nodo nodoActual = cabecera;
         while (nodoActual != null) {
-            System.out.print(nodoActual.dato + " -> ");
+            System.out.print(nodoActual.dato + " <-> ");
             nodoActual = nodoActual.siguiente;
         }
         System.out.print("null");
     }
 
-    // Método para eliminar un elemento del inicio de la lista
+    public void imprimirListaFinAInicio() {
+        Nodo nodoActual = cabecera;
+        if (estaVacia()) {
+            System.out.println("null");
+            return;
+        }
+        System.out.print("null <-> ");
+        while (nodoActual.siguiente != null) {
+            nodoActual = nodoActual.siguiente;
+        }
+        while (nodoActual != null) {
+            System.out.print(nodoActual.dato + " <-> ");
+            nodoActual = nodoActual.anterior;
+        }
+        System.out.print("null");
+    }
+
     public int eliminarDelInicio() {
         if (cabecera != null) {
             int dato = cabecera.dato;
@@ -93,18 +114,18 @@ public class ListaDobleEnlazada {
         ListaDobleEnlazada lista = new ListaDobleEnlazada();
         System.out.println();
         System.out.println("Elementos de la lista");
-        lista.imprimirLista();
+        lista.imprimirListaInicioAFin();
         lista.agregarAlInicio(19);
         lista.agregarAlfinal(28);
         lista.agregarAlInicio(11);
         lista.agregarAlfinal(51);
         lista.eliminarDelInicio();
         System.out.println("\nElementos de la lista");
-        lista.imprimirLista();
+        lista.imprimirListaFinAInicio();
         lista.agregarAlInicio(9);
         lista.eliminarDelFinal();
         System.out.println("\nElementos de la lista");
-        lista.imprimirLista();
+        lista.imprimirListaInicioAFin();
         System.out.println();
     }
 }   

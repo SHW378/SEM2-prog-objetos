@@ -6,7 +6,7 @@ public class App {
         File baseDirectory = new File(basePath);
 
         if (baseDirectory.exists() && baseDirectory.isDirectory()) {
-            System.out.println(baseDirectory.getName());
+            System.out.println("- " + baseDirectory.getName());
             exploreDirectory(baseDirectory, 1);
         } else {
             System.out.println("El directorio especificado no existe o no es válido.");
