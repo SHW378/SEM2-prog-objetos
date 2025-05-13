@@ -10,7 +10,6 @@ public class SistemaBancario {
     }
 
     public void ejecutar() {
-        Scanner scanner = new Scanner(System.in);
         boolean continuar = true;
 
         while (continuar) {
