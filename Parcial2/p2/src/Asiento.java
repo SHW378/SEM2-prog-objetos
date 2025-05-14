@@ -5,25 +5,30 @@ public class Asiento {
         this.reservado = false;
     }
 
-    public void reservar() {
+    public boolean reservar() {
         if (!reservado) {
             reservado = true;
-            System.out.println("El asiento ha sido reservado.");
+            return true;
         } else {
-            System.out.println("El asiento ya está reservado.");
+            return false;
         }
     }
 
-    public void cancelarReserva() {
+    public boolean cancelarReserva() {
         if (reservado) {
             reservado = false;
-            System.out.println("La reserva del asiento ha sido cancelada.");
+            return true;
         } else {
-            System.out.println("El asiento no está reservado.");
+            return false;
         }
     }
 
     public boolean estaReservado() {
         return reservado;
+    }
+
+    @Override
+    public String toString() {
+        return reservado ? "[X]" : "[ ]";
     }
 }

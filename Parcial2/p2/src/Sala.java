@@ -2,11 +2,16 @@ import java.util.ArrayList;
 
 public class Sala {
     private ArrayList<ArrayList<Asiento>> asientos;
+    private int filas;
+    private int columnas;
 
     public Sala(int filas, int columnas) {
-        asientos = new ArrayList<>(filas);
+        this.filas = filas;
+        this.columnas = columnas;
+        this.asientos = new ArrayList<>();
+
         for (int i = 0; i < filas; i++) {
-            ArrayList<Asiento> fila = new ArrayList<>(columnas);
+            ArrayList<Asiento> fila = new ArrayList<>();
             for (int j = 0; j < columnas; j++) {
                 fila.add(new Asiento());
             }
@@ -14,31 +19,53 @@ public class Sala {
         }
     }
 
-    public void reservarAsientoSala(int fila, int columna) {
-        if (fila < 0 || fila >= asientos.size() || columna < 0 || columna >= asientos.get(fila).size()) {
-            System.out.println("Asiento no válido.");
-            return;
+    public boolean reservarAsiento(int fila, int columna) {
+        if (PosicionValida(fila, columna)) {
+            return asientos.get(fila).get(columna).reservar();
         }
-        Asiento asiento = asientos.get(fila).get(columna);
-        asiento.reservar();
+        return false;
     }
 
-    public void cancelarReservaSala(int fila, int columna) {
-        if (fila < 0 || fila >= asientos.size() || columna < 0 || columna >= asientos.get(fila).size()) {
-            System.out.println("Asiento no válido.");
-            return;
+    public boolean cancelarReserva(int fila, int columna) {
+        if (PosicionValida(fila, columna)) {
+            return asientos.get(fila).get(columna).cancelarReserva();
         }
-        Asiento asiento = asientos.get(fila).get(columna);
-        asiento.cancelarReserva();
+        return false;
     }
 
-    public void mostrarAsientosSala() {
-        for (int i = 0; i < asientos.size(); i++) {
-            for (int j = 0; j < asientos.get(i).size(); j++) {
-                Asiento asiento = asientos.get(i).get(j);
-                System.out.print(asiento.estaReservado() ? "[X] " : "[ ] ");
+    public boolean estaReservado(int fila, int columna) {
+        if (PosicionValida(fila, columna)) {
+            return asientos.get(fila).get(columna).estaReservado();
+        }
+        return false;
+    }
+
+    public void mostrarEstado() {
+        System.out.println("Estado de los asientos:");
+        System.out.println("   ");
+        for (int j = 0; j < columnas; j++) {
+            System.out.printf("%2d ", j);
+        }
+        System.out.println();
+
+        for (int i = 0; i < filas; i++) {
+            System.out.printf("%2d ", i);
+            for (int j = 0; j < columnas; j++) {
+                System.out.println(asientos.get(i).get(j) + " ");
             }
             System.out.println();
         }
+    }
+
+    public boolean PosicionValida(int fila, int columna) {
+        return fila >= 0 && fila < filas && columna >= 0 && columna < columnas;
+    }
+
+    public int getFilas() {
+        return filas;
+    }
+
+    public int getColumnas() {
+        return columnas;
     }
 }
