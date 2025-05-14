@@ -14,7 +14,7 @@ public class Sala {
         }
     }
 
-    public void reservarAsiento(int fila, int columna) {
+    public void reservarAsientoSala(int fila, int columna) {
         if (fila < 0 || fila >= asientos.size() || columna < 0 || columna >= asientos.get(fila).size()) {
             System.out.println("Asiento no válido.");
             return;
@@ -23,7 +23,7 @@ public class Sala {
         asiento.reservar();
     }
 
-    public void cancelarReserva(int fila, int columna) {
+    public void cancelarReservaSala(int fila, int columna) {
         if (fila < 0 || fila >= asientos.size() || columna < 0 || columna >= asientos.get(fila).size()) {
             System.out.println("Asiento no válido.");
             return;
@@ -32,7 +32,7 @@ public class Sala {
         asiento.cancelarReserva();
     }
 
-    public void mostrarAsientos() {
+    public void mostrarAsientosSala() {
         for (int i = 0; i < asientos.size(); i++) {
             for (int j = 0; j < asientos.get(i).size(); j++) {
                 Asiento asiento = asientos.get(i).get(j);
