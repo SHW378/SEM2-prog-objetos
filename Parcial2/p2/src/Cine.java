@@ -1,46 +1,63 @@
 import java.util.ArrayList;
 
 public class Cine {
-    private ArrayList<ArrayList<Sala>> funciones;
-    
-    public Cine(int numFunciones, int numSalas, int filas, int columnas) {
-        funciones = new ArrayList<>(numFunciones);
+    private ArrayList<ArrayList<Sala>> funcionesSalas;
+    private int numFunciones;
+    private int numSalasPorFuncion;
+
+    public Cine(int numFunciones, int numSalasFuncion, int filas, int columnas) {
+        this.numFunciones = numFunciones;
+        this.numSalasPorFuncion = numSalasFuncion;
+        this.funcionesSalas = new ArrayList<>();
+
         for (int i = 0; i < numFunciones; i++) {
-            ArrayList<Sala> salas = new ArrayList<>(numSalas);
-            for (int j = 0; j < numSalas; j++) {
-                salas.add(new Sala(filas, columnas));
+            ArrayList<Sala> salas = new ArrayList<>();
+            for (int j = 0; j < numSalasFuncion; j++) {
+                salas.add(new Sala(filas, columnas)); 
             }
-            funciones.add(salas);
+            funcionesSalas.add(salas);
         }
     }
 
-    public void reservarAsientoCine(int funcion, int sala, int fila, int columna) {
-        if (funcion < 0 || funcion >= funciones.size() || sala < 0 || sala >= funciones.get(funcion).size()) {
-            System.out.println("Función o sala no válida.");
-            return;
+    public boolean reservarAsiento(int funcion, int sala, int fila, int columna) {
+        if (validarIndices(funcion, sala)) {
+            return funcionesSalas.get(funcion).get(sala).cancelarReserva(fila, columna);
         }
-        Sala salaSeleccionada = funciones.get(funcion).get(sala);
-        salaSeleccionada.reservarAsientoSala(fila, columna);
+        return false;
     }
 
-    public void cancelarReservaCine(int funcion, int sala, int fila, int columna) {
-        if (funcion < 0 || funcion >= funciones.size() || sala < 0 || sala >= funciones.get(funcion).size()) {
-            System.out.println("Función o sala no válida.");
-            return;
+    public boolean estaReservado(int funcion, int sala, int fila, int columna) {
+        if (validarIndices(funcion, sala)) {
+            return funcionesSalas.get(funcion).get(sala).estaReservado(fila, columna);
         }
-        Sala salaSeleccionada = funciones.get(funcion).get(sala);
-        salaSeleccionada.cancelarReservaSala(fila, columna);
+        return false;
     }
 
-    public void mostrarAsientosCine(int funcion, int sala) {
-        if (funcion < 0 || funcion >= funciones.size() || sala < 0 || sala >= funciones.get(funcion).size()) {
-            System.out.println("Función o sala no válida.");
-            return;
-        }
-        System.out.println("Estado de los asientos:");
-        System.out.println("Función " + funcion + ", Sala " + sala);
-        Sala salaSeleccionada = funciones.get(funcion).get(sala);
-        salaSeleccionada.mostrarAsientosSala();
-
+    public boolean validarIndices(int funcion, int sala) {
+        return funcion >= 0 && funcion < numFunciones && sala >= 0 && sala < numSalasPorFuncion;
     }
-}
+
+    public void mostrarEstadosala(int funcion, int sala) {
+        if (validarIndices(funcion, sala)) {
+            System.out.println("Estado de la función" + funcion + ", Sala" + sala + ":");
+            funcionesSalas.get(funcion).get(sala).mostrarEstado();
+        } else {
+            System.out.println("Función o sala no valida");
+        }
+    }
+
+    public int getNumFunciones() {
+        return numFunciones;
+    }
+
+    public int getNumSalasPorFuncion() {
+        return numSalasPorFuncion;
+    }
+
+    public int getFilasSala(int funcion, int sala) {
+        if (validarIndices(funcion, sala)) {
+            return funcionesSalas.get(funcion).get(sala).getColumnas();
+        }
+        return 0;
+    }
+} 
