@@ -1,34 +1,32 @@
 public class Asiento {
     private boolean reservado;
-
+    
     public Asiento() {
-        this.reservado = false;
+        this.reservado = false; // Inicialmente el asiento está disponible
     }
-
+    
+    public boolean isReservado() {
+        return reservado;
+    }
+    
     public boolean reservar() {
         if (!reservado) {
             reservado = true;
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
-
+    
     public boolean cancelarReserva() {
         if (reservado) {
             reservado = false;
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
-
-    public boolean estaReservado() {
-        return reservado;
-    }
-
+    
     @Override
     public String toString() {
-        return reservado ? "[X]" : "[ ]";
+        return reservado ? "[X]" : "[ ]"; // X para reservado, espacio para disponible
     }
 }
