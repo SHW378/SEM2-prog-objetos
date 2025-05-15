@@ -161,7 +161,6 @@ public class Reserva {
             }
         }
         
-        // Mostrar las cancelaciones restantes
         cancelaciones.mostrarCancelaciones();
     }
     
@@ -187,7 +186,6 @@ public class Reserva {
             }
         }
         
-        // Mostrar las reservas en espera restantes
         reservasEspera.mostrarReservasEspera();
     }
     
@@ -196,10 +194,10 @@ public class Reserva {
         do {
             while (!scanner.hasNextInt()) {
                 System.out.println("Por favor, ingrese un número entero.");
-                scanner.next(); // Descartar entrada no válida
+                scanner.next(); 
             }
             valor = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea
+            scanner.nextLine(); 
             
             if (valor <= 0) {
                 System.out.println("Por favor, ingrese un número mayor que cero.");
@@ -214,10 +212,10 @@ public class Reserva {
         do {
             while (!scanner.hasNextInt()) {
                 System.out.println("Por favor, ingrese un número entero.");
-                scanner.next(); // Descartar entrada no válida
+                scanner.next(); 
             }
             valor = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea
+            scanner.nextLine(); 
             
             if (valor < min || valor > max) {
                 System.out.println("Por favor, ingrese un número entre " + min + " y " + max + ".");
