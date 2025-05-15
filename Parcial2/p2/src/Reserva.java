@@ -4,7 +4,6 @@ public class Reserva {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        // Configuración inicial del cine
         System.out.println("=== SISTEMA DE RESERVAS PARA CINE ===");
         System.out.println("Configuración del cine:");
         
@@ -20,7 +19,6 @@ public class Reserva {
         System.out.print("Número de columnas por sala: ");
         int numColumnas = obtenerEnteroPositivo(scanner);
         
-        // Crear instancias
         Cine cine = new Cine(numFunciones, numSalas, numFilas, numColumnas);
         Cancelaciones cancelaciones = new Cancelaciones();
         ReservasEspera reservasEspera = new ReservasEspera();

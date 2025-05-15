@@ -10,7 +10,6 @@ public class Sala {
         this.columnas = columnas;
         this.asientos = new ArrayList<>();
         
-        // Inicializar la matriz de asientos
         for (int i = 0; i < filas; i++) {
             ArrayList<Asiento> fila = new ArrayList<>();
             for (int j = 0; j < columnas; j++) {
@@ -48,7 +47,6 @@ public class Sala {
     public void mostrarEstado() {
         System.out.println("Estado de la sala:");
         
-        // Mostrar números de columnas en la parte superior
         System.out.print("   ");
         for (int j = 0; j < columnas; j++) {
             System.out.printf("%2d ", j);
@@ -56,7 +54,7 @@ public class Sala {
         System.out.println();
         
         for (int i = 0; i < filas; i++) {
-            System.out.printf("%2d ", i); // Mostrar número de fila
+            System.out.printf("%2d ", i); 
             for (int j = 0; j < columnas; j++) {
                 System.out.print(asientos.get(i).get(j) + " ");
             }
