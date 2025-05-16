@@ -47,7 +47,7 @@ public class Reserva {
                         reservasEspera.procesarReservaEnEspera(cine);
                         break;
                     case 8:
-                        System.out.println("Saliendo del programa.");
+                        System.out.println("Saliendo del programa...");
                         salir = true;
                         break;
                     default:
