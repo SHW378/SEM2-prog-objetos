@@ -6,10 +6,10 @@ public class Reserva {
         
         System.out.println("===== CONFIGURACIÓN INICIAL DEL CINE =====");
         
-        int numFunciones = solicitarEnteroPositivo(scanner, "Ingrese la cantidad de funciones : ", 1);
-        int numSalas = solicitarEnteroPositivo(scanner, "Ingrese la cantidad de salas por función: ", 1);
-        int numFilas = solicitarEnteroPositivo(scanner, "Ingrese la cantidad de filas por sala: ", 1);
-        int numColumnas = solicitarEnteroPositivo(scanner, "Ingrese la cantidad de asientos por fila: ", 1);
+        int numFunciones = EnteroPositivo(scanner, "Ingrese la cantidad de funciones : ", 1);
+        int numSalas = EnteroPositivo(scanner, "Ingrese la cantidad de salas por función: ", 1);
+        int numFilas = EnteroPositivo(scanner, "Ingrese la cantidad de filas por sala: ", 1);
+        int numColumnas = EnteroPositivo(scanner, "Ingrese la cantidad de asientos por fila: ", 1);
         
         
         Cine cine = new Cine(numFunciones, numSalas, numFilas, numColumnas);
@@ -17,8 +17,8 @@ public class Reserva {
         ReservasEspera reservasEspera = new ReservasEspera();
         
         
-        boolean salir = false;
-        while (!salir) {
+        boolean continuar = false;
+        while (!continuar) {
             mostrarMenu();
             
             try {
@@ -48,7 +48,7 @@ public class Reserva {
                         break;
                     case 8:
                         System.out.println("Saliendo del programa...");
-                        salir = true;
+                        continuar = true;
                         break;
                     default:
                         System.out.println("Opción no válida. Por favor, intente de nuevo.");
@@ -57,7 +57,7 @@ public class Reserva {
                 System.out.println("Entrada no válida. Por favor, ingrese un número.");
             }
             
-            if (!salir) {
+            if (!continuar) {
                 System.out.println("\nPresione Enter para continuar...");
                 scanner.nextLine();
             }
@@ -66,7 +66,7 @@ public class Reserva {
         scanner.close();
     }
     
-    private static int solicitarEnteroPositivo(Scanner scanner, String mensaje, int minimo) {
+    private static int EnteroPositivo(Scanner scanner, String mensaje, int minimo) {
         int valor = 0;
         boolean entradaValida = false;
         
