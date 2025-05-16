@@ -55,4 +55,29 @@ public class Cancelaciones {
             contador++;
         }
     }
+    
+    public void deshacerCancelacion(Cine cine, ReservasEspera reservasEspera) {
+        System.out.println("\n--- Deshacer Cancelación ---");
+        if (!hayReservasCanceladas()) {
+            System.out.println("No hay reservas canceladas para deshacer.");
+            return;
+        }
+        
+        String[] datos = deshacerCancelacion();
+        int funcion = Integer.parseInt(datos[0]);
+        int sala = Integer.parseInt(datos[1]);
+        int fila = Integer.parseInt(datos[2]);
+        int columna = Integer.parseInt(datos[3]);
+        
+        if (cine.estaAsientoReservado(funcion, sala, fila, columna)) {
+            System.out.println("El asiento ya ha sido reservado por otra persona. La cancelación no se puede deshacer.");
+            return;
+        }
+        
+        if (cine.reservarAsiento(funcion, sala, fila, columna)) {
+            System.out.println("Cancelación deshecha con éxito. El asiento ha sido reservado nuevamente.");
+        } else {
+            System.out.println("No se pudo deshacer la cancelación. Error al reservar el asiento.");
+        }
+    }
 }

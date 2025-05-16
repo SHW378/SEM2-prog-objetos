@@ -18,7 +18,7 @@ public class ReservasEspera {
         return !reservasEnEspera.isEmpty();
     }
     
-    public String[] procesarReservaEnEspera() {
+    public String[] obtenerReservaEnEspera() {
         if (!hayReservasEnEspera()) {
             return null;
         }
@@ -59,6 +59,28 @@ public class ReservasEspera {
         while (!temp.isEmpty()) {
             System.out.println(contador + ". " + temp.poll());
             contador++;
+        }
+    }
+    
+    public void procesarReservaEnEspera(Cine cine) {
+        System.out.println("\n--- Procesar Reserva en Espera ---");
+        if (!hayReservasEnEspera()) {
+            System.out.println("No hay reservas en espera para procesar.");
+            return;
+        }
+        
+        String[] datos = obtenerReservaEnEspera();
+        int funcion = Integer.parseInt(datos[0]);
+        int sala = Integer.parseInt(datos[1]);
+        int fila = Integer.parseInt(datos[2]);
+        int columna = Integer.parseInt(datos[3]);
+        
+        if (cine.reservarAsiento(funcion, sala, fila, columna)) {
+            System.out.println("¡Reserva en espera procesada con éxito! Asiento reservado.");
+        } else {
+            System.out.println("No se pudo procesar la reserva en espera. El asiento sigue ocupado.");
+            System.out.println("La reserva volverá al final de la cola de espera.");
+            devolverReservaAEspera(funcion, sala, fila, columna);
         }
     }
 }

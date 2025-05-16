@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Cine {
     private ArrayList<ArrayList<Sala>> salas; 
@@ -73,5 +74,69 @@ public class Cine {
             return salas.get(funcion).get(sala).getColumnas();
         }
         return 0;
+    }
+    
+    public void verSala(Scanner scanner) {
+        System.out.println("\n--- Ver Estado de una Sala ---");
+        System.out.print("Ingrese el número de función (0-" + (getNumFunciones() - 1) + "): ");
+        int funcion = Integer.parseInt(scanner.nextLine());
+        
+        System.out.print("Ingrese el número de sala (0-" + (getNumSalas() - 1) + "): ");
+        int sala = Integer.parseInt(scanner.nextLine());
+        
+        mostrarEstadoSala(funcion, sala);
+    }
+    
+    public void reservarAsiento(ReservasEspera reservasEspera, Scanner scanner) {
+        System.out.println("\n--- Reservar un Asiento ---");
+        System.out.print("Ingrese el número de función (0-" + (getNumFunciones() - 1) + "): ");
+        int funcion = Integer.parseInt(scanner.nextLine());
+        
+        System.out.print("Ingrese el número de sala (0-" + (getNumSalas() - 1) + "): ");
+        int sala = Integer.parseInt(scanner.nextLine());
+        
+        System.out.print("Ingrese el número de fila: ");
+        int fila = Integer.parseInt(scanner.nextLine());
+        
+        System.out.print("Ingrese el número de columna: ");
+        int columna = Integer.parseInt(scanner.nextLine());
+        
+        if (esFuncionYSalaValida(funcion, sala)) {
+            if (reservarAsiento(funcion, sala, fila, columna)) {
+                System.out.println("¡Asiento reservado con éxito!");
+            } else {
+                System.out.println("No se pudo reservar el asiento. Está ocupado o no es válido.");
+                System.out.println("El asiento se ha añadido a la lista de espera.");
+                reservasEspera.agregarReservaEspera(funcion, sala, fila, columna);
+            }
+        } else {
+            System.out.println("Función o sala no válida.");
+        }
+    }
+    
+    public void cancelarReserva(Cancelaciones cancelaciones, Scanner scanner) {
+        System.out.println("\n--- Cancelar una Reserva ---");
+        System.out.print("Ingrese el número de función (0-" + (getNumFunciones() - 1) + "): ");
+        int funcion = Integer.parseInt(scanner.nextLine());
+        
+        System.out.print("Ingrese el número de sala (0-" + (getNumSalas() - 1) + "): ");
+        int sala = Integer.parseInt(scanner.nextLine());
+        
+        System.out.print("Ingrese el número de fila: ");
+        int fila = Integer.parseInt(scanner.nextLine());
+        
+        System.out.print("Ingrese el número de columna: ");
+        int columna = Integer.parseInt(scanner.nextLine());
+        
+        if (esFuncionYSalaValida(funcion, sala)) {
+            if (cancelarReservaAsiento(funcion, sala, fila, columna)) {
+                System.out.println("Reserva cancelada con éxito.");
+                cancelaciones.registrarCancelacion(funcion, sala, fila, columna);
+            } else {
+                System.out.println("No se pudo cancelar la reserva. El asiento no estaba reservado o no es válido.");
+            }
+        } else {
+            System.out.println("Función o sala no válida.");
+        }
     }
 }
