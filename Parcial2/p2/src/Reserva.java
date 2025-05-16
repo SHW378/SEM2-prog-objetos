@@ -4,222 +4,220 @@ public class Reserva {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        System.out.println("=== SISTEMA DE RESERVAS PARA CINE ===");
-        System.out.println("Configuración del cine:");
+        System.out.println("===== CONFIGURACIÓN INICIAL DEL CINE =====");
         
-        System.out.print("Número de funciones: ");
-        int numFunciones = obtenerEnteroPositivo(scanner);
+        int numFunciones = solicitarEnteroPositivo(scanner, "Ingrese la cantidad de funciones : ", 1);
+        int numSalas = solicitarEnteroPositivo(scanner, "Ingrese la cantidad de salas por función: ", 1);
+        int numFilas = solicitarEnteroPositivo(scanner, "Ingrese la cantidad de filas por sala: ", 1);
+        int numColumnas = solicitarEnteroPositivo(scanner, "Ingrese la cantidad de asientos por fila: ", 1);
         
-        System.out.print("Número de salas por función: ");
-        int numSalas = obtenerEnteroPositivo(scanner);
-        
-        System.out.print("Número de filas por sala: ");
-        int numFilas = obtenerEnteroPositivo(scanner);
-        
-        System.out.print("Número de columnas por sala: ");
-        int numColumnas = obtenerEnteroPositivo(scanner);
         
         Cine cine = new Cine(numFunciones, numSalas, numFilas, numColumnas);
         Cancelaciones cancelaciones = new Cancelaciones();
         ReservasEspera reservasEspera = new ReservasEspera();
         
-        int opcion;
-        do {
+        
+        boolean salir = false;
+        while (!salir) {
             mostrarMenu();
-            System.out.print("Seleccione una opción: ");
-            opcion = obtenerEnteroEnRango(scanner, 0, 7);
             
-            switch (opcion) {
-                case 1:
-                    verSalas(scanner, cine);
-                    break;
-                case 2:
-                    reservarAsiento(scanner, cine, reservasEspera);
-                    break;
-                case 3:
-                    cancelarReserva(scanner, cine, cancelaciones);
-                    break;
-                case 4:
-                    verCancelaciones(cancelaciones);
-                    break;
-                case 5:
-                    verReservasEspera(reservasEspera);
-                    break;
-                case 6:
-                    deshacerCancelacion(cine, cancelaciones);
-                    break;
-                case 7:
-                    procesarReservaEspera(cine, reservasEspera);
-                    break;
-                case 0:
-                    System.out.println("Cerrando el sistema...");
-                    break;
+            try {
+                int opcion = Integer.parseInt(scanner.nextLine());
+                
+                switch (opcion) {
+                    case 1:
+                        verSala(cine, scanner);
+                        break;
+                    case 2:
+                        reservarAsiento(cine, reservasEspera, scanner);
+                        break;
+                    case 3:
+                        cancelarReserva(cine, cancelaciones, scanner);
+                        break;
+                    case 4:
+                        verReservasCanceladas(cancelaciones);
+                        break;
+                    case 5:
+                        verReservasEnEspera(reservasEspera);
+                        break;
+                    case 6:
+                        deshacerCancelacion(cine, cancelaciones, reservasEspera);
+                        break;
+                    case 7:
+                        procesarReservaEnEspera(cine, reservasEspera);
+                        break;
+                    case 8:
+                        System.out.println("Saliendo del programa.");
+                        salir = true;
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Por favor, intente de nuevo.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número.");
             }
-        } while (opcion != 0);
+            
+            if (!salir) {
+                System.out.println("\nPresione Enter para continuar...");
+                scanner.nextLine();
+            }
+        }
         
         scanner.close();
     }
     
-    private static void mostrarMenu() {
-        System.out.println("\n=== MENÚ PRINCIPAL ===");
-        System.out.println("1. Ver estado de las salas");
-        System.out.println("2. Reservar asiento");
-        System.out.println("3. Cancelar reserva");
-        System.out.println("4. Ver reservas canceladas");
-        System.out.println("5. Ver reservas en espera");
-        System.out.println("6. Deshacer cancelación");
-        System.out.println("7. Procesar reserva en espera");
-        System.out.println("0. Salir");
+    private static int solicitarEnteroPositivo(Scanner scanner, String mensaje, int minimo) {
+        int valor = 0;
+        boolean entradaValida = false;
+        
+        while (!entradaValida) {
+            System.out.print(mensaje);
+            try {
+                valor = Integer.parseInt(scanner.nextLine());
+                if (valor >= minimo) {
+                    entradaValida = true;
+                } else {
+                    System.out.println("Por favor, ingrese un número mayor o igual a " + minimo + ".");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Por favor, ingrese un número válido.");
+            }
+        }
+        
+        return valor;
     }
     
-    private static void verSalas(Scanner scanner, Cine cine) {
+    private static void mostrarMenu() {
+        System.out.println("\n===== SISTEMA DE RESERVAS DE CINE =====");
+        System.out.println("1. Ver estado de una sala");
+        System.out.println("2. Reservar un asiento");
+        System.out.println("3. Cancelar una reserva");
+        System.out.println("4. Ver reservas canceladas");
+        System.out.println("5. Ver reservas en espera");
+        System.out.println("6. Deshacer una cancelación");
+        System.out.println("7. Procesar reserva en espera");
+        System.out.println("8. Salir");
+        System.out.print("Seleccione una opción: ");
+    }
+    
+    private static void verSala(Cine cine, Scanner scanner) {
+        System.out.println("\n--- Ver Estado de una Sala ---");
         System.out.print("Ingrese el número de función (0-" + (cine.getNumFunciones() - 1) + "): ");
-        int funcion = obtenerEnteroEnRango(scanner, 0, cine.getNumFunciones() - 1);
+        int funcion = Integer.parseInt(scanner.nextLine());
         
-        System.out.print("Ingrese el número de sala (0-" + (cine.getNumSalasPorFuncion() - 1) + "): ");
-        int sala = obtenerEnteroEnRango(scanner, 0, cine.getNumSalasPorFuncion() - 1);
+        System.out.print("Ingrese el número de sala (0-" + (cine.getNumSalas() - 1) + "): ");
+        int sala = Integer.parseInt(scanner.nextLine());
         
         cine.mostrarEstadoSala(funcion, sala);
     }
     
-    private static void reservarAsiento(Scanner scanner, Cine cine, ReservasEspera reservasEspera) {
+    private static void reservarAsiento(Cine cine, ReservasEspera reservasEspera, Scanner scanner) {
+        System.out.println("\n--- Reservar un Asiento ---");
         System.out.print("Ingrese el número de función (0-" + (cine.getNumFunciones() - 1) + "): ");
-        int funcion = obtenerEnteroEnRango(scanner, 0, cine.getNumFunciones() - 1);
+        int funcion = Integer.parseInt(scanner.nextLine());
         
-        System.out.print("Ingrese el número de sala (0-" + (cine.getNumSalasPorFuncion() - 1) + "): ");
-        int sala = obtenerEnteroEnRango(scanner, 0, cine.getNumSalasPorFuncion() - 1);
+        System.out.print("Ingrese el número de sala (0-" + (cine.getNumSalas() - 1) + "): ");
+        int sala = Integer.parseInt(scanner.nextLine());
         
-        System.out.print("Ingrese la fila del asiento (0-" + (cine.getFilasSala(funcion, sala) - 1) + "): ");
-        int fila = obtenerEnteroEnRango(scanner, 0, cine.getFilasSala(funcion, sala) - 1);
+        System.out.print("Ingrese el número de fila: ");
+        int fila = Integer.parseInt(scanner.nextLine());
         
-        System.out.print("Ingrese la columna del asiento (0-" + (cine.getColumnasSala(funcion, sala) - 1) + "): ");
-        int columna = obtenerEnteroEnRango(scanner, 0, cine.getColumnasSala(funcion, sala) - 1);
+        System.out.print("Ingrese el número de columna: ");
+        int columna = Integer.parseInt(scanner.nextLine());
         
-        if (cine.reservarAsiento(funcion, sala, fila, columna)) {
-            System.out.println("¡Asiento reservado con éxito!");
+        if (cine.esFuncionYSalaValida(funcion, sala)) {
+            if (cine.reservarAsiento(funcion, sala, fila, columna)) {
+                System.out.println("¡Asiento reservado con éxito!");
+            } else {
+                System.out.println("No se pudo reservar el asiento. Está ocupado o no es válido.");
+                System.out.println("El asiento se ha añadido a la lista de espera.");
+                reservasEspera.agregarReservaEspera(funcion, sala, fila, columna);
+            }
         } else {
-            System.out.println("No se pudo reservar el asiento. El asiento ya está reservado.");
-            System.out.println("La reserva se agregará a la lista de espera.");
-            reservasEspera.agregarReservaEspera(funcion, sala, fila, columna);
-            reservasEspera.mostrarReservasEspera();
+            System.out.println("Función o sala no válida.");
         }
     }
     
-    private static void cancelarReserva(Scanner scanner, Cine cine, Cancelaciones cancelaciones) {
+    private static void cancelarReserva(Cine cine, Cancelaciones cancelaciones, Scanner scanner) {
+        System.out.println("\n--- Cancelar una Reserva ---");
         System.out.print("Ingrese el número de función (0-" + (cine.getNumFunciones() - 1) + "): ");
-        int funcion = obtenerEnteroEnRango(scanner, 0, cine.getNumFunciones() - 1);
+        int funcion = Integer.parseInt(scanner.nextLine());
         
-        System.out.print("Ingrese el número de sala (0-" + (cine.getNumSalasPorFuncion() - 1) + "): ");
-        int sala = obtenerEnteroEnRango(scanner, 0, cine.getNumSalasPorFuncion() - 1);
+        System.out.print("Ingrese el número de sala (0-" + (cine.getNumSalas() - 1) + "): ");
+        int sala = Integer.parseInt(scanner.nextLine());
         
-        System.out.print("Ingrese la fila del asiento (0-" + (cine.getFilasSala(funcion, sala) - 1) + "): ");
-        int fila = obtenerEnteroEnRango(scanner, 0, cine.getFilasSala(funcion, sala) - 1);
+        System.out.print("Ingrese el número de fila: ");
+        int fila = Integer.parseInt(scanner.nextLine());
         
-        System.out.print("Ingrese la columna del asiento (0-" + (cine.getColumnasSala(funcion, sala) - 1) + "): ");
-        int columna = obtenerEnteroEnRango(scanner, 0, cine.getColumnasSala(funcion, sala) - 1);
+        System.out.print("Ingrese el número de columna: ");
+        int columna = Integer.parseInt(scanner.nextLine());
         
-        if (cine.cancelarReserva(funcion, sala, fila, columna)) {
-            System.out.println("Reserva cancelada con éxito.");
-            cancelaciones.agregarCancelacion(funcion, sala, fila, columna);
-            cancelaciones.mostrarCancelaciones();
+        if (cine.esFuncionYSalaValida(funcion, sala)) {
+            if (cine.cancelarReservaAsiento(funcion, sala, fila, columna)) {
+                System.out.println("Reserva cancelada con éxito.");
+                cancelaciones.registrarCancelacion(funcion, sala, fila, columna);
+            } else {
+                System.out.println("No se pudo cancelar la reserva. El asiento no estaba reservado o no es válido.");
+            }
         } else {
-            System.out.println("No se pudo cancelar la reserva. El asiento no estaba reservado.");
+            System.out.println("Función o sala no válida.");
         }
     }
     
-    private static void verCancelaciones(Cancelaciones cancelaciones) {
+    private static void verReservasCanceladas(Cancelaciones cancelaciones) {
+        System.out.println("\n--- Reservas Canceladas ---");
         cancelaciones.mostrarCancelaciones();
     }
     
-    private static void verReservasEspera(ReservasEspera reservasEspera) {
-        reservasEspera.mostrarReservasEspera();
+    private static void verReservasEnEspera(ReservasEspera reservasEspera) {
+        System.out.println("\n--- Reservas en Espera ---");
+        reservasEspera.mostrarReservasEnEspera();
     }
     
-    private static void deshacerCancelacion(Cine cine, Cancelaciones cancelaciones) {
-        if (!cancelaciones.hayCancelaciones()) {
-            System.out.println("No hay cancelaciones para deshacer.");
+    private static void deshacerCancelacion(Cine cine, Cancelaciones cancelaciones, ReservasEspera reservasEspera) {
+        System.out.println("\n--- Deshacer Cancelación ---");
+        if (!cancelaciones.hayReservasCanceladas()) {
+            System.out.println("No hay reservas canceladas para deshacer.");
             return;
         }
         
-        InfoReserva info = cancelaciones.deshacerCancelacion();
-        if (info != null) {
-            int funcion = info.getFuncion();
-            int sala = info.getSala();
-            int fila = info.getFila();
-            int columna = info.getColumna();
-            
-            if (cine.estaReservado(funcion, sala, fila, columna)) {
-                System.out.println("No se puede deshacer la cancelación. El asiento ya está reservado.");
-            } else {
-                if (cine.reservarAsiento(funcion, sala, fila, columna)) {
-                    System.out.println("Se deshizo la cancelación. Asiento reservado nuevamente.");
-                } else {
-                    System.out.println("Error al deshacer la cancelación.");
-                }
-            }
+        String[] datos = cancelaciones.deshacerCancelacion();
+        int funcion = Integer.parseInt(datos[0]);
+        int sala = Integer.parseInt(datos[1]);
+        int fila = Integer.parseInt(datos[2]);
+        int columna = Integer.parseInt(datos[3]);
+        
+        if (cine.estaAsientoReservado(funcion, sala, fila, columna)) {
+            System.out.println("El asiento ya ha sido reservado por otra persona. La cancelación no se puede deshacer.");
+            return;
         }
         
-        cancelaciones.mostrarCancelaciones();
+        if (cine.reservarAsiento(funcion, sala, fila, columna)) {
+            System.out.println("Cancelación deshecha con éxito. El asiento ha sido reservado nuevamente.");
+        } else {
+            System.out.println("No se pudo deshacer la cancelación. Error al reservar el asiento.");
+        }
     }
     
-    private static void procesarReservaEspera(Cine cine, ReservasEspera reservasEspera) {
-        if (!reservasEspera.hayReservasEspera()) {
+    private static void procesarReservaEnEspera(Cine cine, ReservasEspera reservasEspera) {
+        System.out.println("\n--- Procesar Reserva en Espera ---");
+        if (!reservasEspera.hayReservasEnEspera()) {
             System.out.println("No hay reservas en espera para procesar.");
             return;
         }
         
-        InfoReserva info = reservasEspera.procesarReservaEspera();
-        if (info != null) {
-            int funcion = info.getFuncion();
-            int sala = info.getSala();
-            int fila = info.getFila();
-            int columna = info.getColumna();
-            
-            if (cine.reservarAsiento(funcion, sala, fila, columna)) {
-                System.out.println("Reserva en espera procesada con éxito. Asiento reservado.");
-            } else {
-                System.out.println("No se pudo procesar la reserva en espera. El asiento sigue ocupado.");
-                System.out.println("La reserva vuelve a la cola de espera.");
-                reservasEspera.regresarAEspera(info);
-            }
+        String[] datos = reservasEspera.procesarReservaEnEspera();
+        int funcion = Integer.parseInt(datos[0]);
+        int sala = Integer.parseInt(datos[1]);
+        int fila = Integer.parseInt(datos[2]);
+        int columna = Integer.parseInt(datos[3]);
+        
+        if (cine.reservarAsiento(funcion, sala, fila, columna)) {
+            System.out.println("¡Reserva en espera procesada con éxito! Asiento reservado.");
+        } else {
+            System.out.println("No se pudo procesar la reserva en espera. El asiento sigue ocupado.");
+            System.out.println("La reserva volverá al final de la cola de espera.");
+            reservasEspera.devolverReservaAEspera(funcion, sala, fila, columna);
         }
-        
-        reservasEspera.mostrarReservasEspera();
-    }
-    
-    private static int obtenerEnteroPositivo(Scanner scanner) {
-        int valor;
-        do {
-            while (!scanner.hasNextInt()) {
-                System.out.println("Por favor, ingrese un número entero.");
-                scanner.next(); 
-            }
-            valor = scanner.nextInt();
-            scanner.nextLine(); 
-            
-            if (valor <= 0) {
-                System.out.println("Por favor, ingrese un número mayor que cero.");
-            }
-        } while (valor <= 0);
-        
-        return valor;
-    }
-    
-    private static int obtenerEnteroEnRango(Scanner scanner, int min, int max) {
-        int valor;
-        do {
-            while (!scanner.hasNextInt()) {
-                System.out.println("Por favor, ingrese un número entero.");
-                scanner.next(); 
-            }
-            valor = scanner.nextInt();
-            scanner.nextLine(); 
-            
-            if (valor < min || valor > max) {
-                System.out.println("Por favor, ingrese un número entre " + min + " y " + max + ".");
-            }
-        } while (valor < min || valor > max);
-        
-        return valor;
     }
 }

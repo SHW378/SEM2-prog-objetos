@@ -1,32 +1,32 @@
 public class Asiento {
-    private boolean reservado;
+    private boolean reservado; // atributo
 
-    public Asiento() {
+    public Asiento() { // constructor
         this.reservado = false;
     }
 
-    public boolean estaReservado() {
+    // Saber si está reservado
+    public boolean reservado() {
         return reservado;
     }
 
+    // Reservar asiento
     public boolean reservar() {
         if (!reservado) {
             reservado = true;
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
-    public boolean cancelarReserva() {
+    // Cancelar reserva
+    public boolean cancelar() {
         if (reservado) {
             reservado = false;
             return true;
+        } else {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return reservado ? "[X]" : "[ ]";
     }
 }

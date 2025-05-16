@@ -2,45 +2,63 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class ReservasEspera {
-    private Queue<InfoReserva> reservasEnEspera;
+    private Queue<String> reservasEnEspera;
     
     public ReservasEspera() {
-        this.reservasEnEspera = new LinkedList<>();
+        reservasEnEspera = new LinkedList<>();
     }
     
     public void agregarReservaEspera(int funcion, int sala, int fila, int columna) {
-        InfoReserva info = new InfoReserva(funcion, sala, fila, columna);
-        reservasEnEspera.add(info);
+        String infoReserva = String.format("Función: %d, Sala: %d, Fila: %d, Columna: %d", 
+                                          funcion, sala, fila, columna);
+        reservasEnEspera.add(infoReserva);
     }
     
-    public InfoReserva procesarReservaEspera() {
-        if (!reservasEnEspera.isEmpty()) {
-            return reservasEnEspera.poll();
-        }
-        return null;
-    }
-    
-    public void regresarAEspera(InfoReserva info) {
-        if (info != null) {
-            reservasEnEspera.add(info);
-        }
-    }
-    
-    public boolean hayReservasEspera() {
+    public boolean hayReservasEnEspera() {
         return !reservasEnEspera.isEmpty();
     }
     
-    public void mostrarReservasEspera() {
+    public String[] procesarReservaEnEspera() {
+        if (!hayReservasEnEspera()) {
+            return null;
+        }
+        
+        String infoReserva = reservasEnEspera.poll();
+        String[] partes = infoReserva.split(", ");
+        
+        int funcion = Integer.parseInt(partes[0].split(": ")[1]);
+        int sala = Integer.parseInt(partes[1].split(": ")[1]);
+        int fila = Integer.parseInt(partes[2].split(": ")[1]);
+        int columna = Integer.parseInt(partes[3].split(": ")[1]);
+        
+        return new String[] {
+            String.valueOf(funcion),
+            String.valueOf(sala),
+            String.valueOf(fila),
+            String.valueOf(columna)
+        };
+    }
+    
+    public void devolverReservaAEspera(int funcion, int sala, int fila, int columna) {
+        String infoReserva = String.format("Función: %d, Sala: %d, Fila: %d, Columna: %d", 
+                                          funcion, sala, fila, columna);
+        reservasEnEspera.add(infoReserva);
+    }
+    
+    public void mostrarReservasEnEspera() {
         if (reservasEnEspera.isEmpty()) {
-            System.out.println("No hay reservas en espera.");
+            System.out.println("No hay reservas en espera en el sistema.");
             return;
         }
         
-        System.out.println("Reservas en espera:");
-        int i = 1;
-        for (InfoReserva info : reservasEnEspera) {
-            System.out.println(i + ": " + info);
-            i++;
+        System.out.println("Lista de reservas en espera (de la más antigua a la más reciente):");
+        
+        Queue<String> temp = new LinkedList<>(reservasEnEspera);
+        
+        int contador = 1;
+        while (!temp.isEmpty()) {
+            System.out.println(contador + ". " + temp.poll());
+            contador++;
         }
     }
 }
