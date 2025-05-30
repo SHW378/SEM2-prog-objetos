@@ -1,0 +1,12 @@
+public class Grafos {
+    public static void main(String[] args) {
+        GrafoMatriz grafoMatriz = new GrafoMatriz(4);
+        grafoMatriz.agregarArista(1, 1);
+        grafoMatriz.agregarArista(0, 2);
+        grafoMatriz.agregarArista(1, 3);
+        grafoMatriz.agregarArista(2, 3);
+        System.out.println("Grafo representado por una matriz de adyacencia:");
+        grafoMatriz.mostrarMatriz();
+        System.out.println();
+    }
+}
