@@ -8,5 +8,13 @@ public class Grafos {
         System.out.println("Grafo representado por una matriz de adyacencia:");
         grafoMatriz.mostrarMatriz();
         System.out.println();
+
+        GrafoLista grafoLista = new GrafoLista(4);
+        grafoLista.agregarArista(0, 1);
+        grafoLista.agregarArista(0, 2);
+        grafoLista.agregarArista(1, 3);
+        grafoLista.agregarArista(2, 3);
+        System.out.println("Grafo representado por una lista de adyacencia:");
+        grafoLista.mostrarListas();
     }
 }

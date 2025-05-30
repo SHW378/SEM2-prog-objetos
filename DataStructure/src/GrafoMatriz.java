@@ -13,9 +13,9 @@ public class GrafoMatriz {
     }
 
     public void mostrarMatriz() {
-        System.out.println(" ");
+        System.out.print("  ");
         for (int j = 0; j < numVertices; j++) {
-            System.out.println(j + " ");
+            System.out.print(j + " ");
         }
         System.out.println();
         // Imprimir la matriz de adyacencia
