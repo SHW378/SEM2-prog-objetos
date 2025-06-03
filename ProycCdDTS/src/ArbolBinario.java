@@ -34,7 +34,7 @@ public class ArbolBinario {
                     }
                     case 6 -> abb.mostrarRutas();
                     case 7 -> abb.mostrarConexionesDeCiudad(capturarCiudad(scanner, "Ingrese el nombre de la ciudad: "));
-                    case 8 -> System.out.println("Saliste del programa.");
+                    case 8 -> System.out.println("Saliste del programa....");
                     default -> System.out.println("Opción inválida.");
                 }
             } catch (Exception e) {
