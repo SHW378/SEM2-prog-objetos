@@ -62,7 +62,7 @@ public class GrafoMatriz {
                     visitados[vecino] = true;
                     cola[fin++] = vecino;
                 }
-            }    
+            }
         }
     }
 }
