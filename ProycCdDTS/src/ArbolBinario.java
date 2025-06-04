@@ -7,15 +7,14 @@ public class ArbolBinario {
         int opcion = 0;
 
         do {
-            System.out.println("\n--- Gestion de Ciudades ---");
-            System.out.println("1. Agregar ciudad");
-            System.out.println("2. Buscar ciudad");
-            System.out.println("3. Eliminar ciudad");
-            System.out.println("4. Recorridos del árbol");
-            System.out.println("5. Conectar ciudades");
-            System.out.println("6. Mostrar rutas");
-            System.out.println("7. Mostrar conexiones de una ciudad");
-            System.out.println("8. Salir");
+            System.out.println("\nMenú de Gestión de Rutas de Transporte:");
+            System.out.println("1. Agregar Ciudad");
+            System.out.println("2. Eliminar Ciudad");
+            System.out.println("3. Añadir Ruta");
+            System.out.println("4. Eliminar Ruta");
+            System.out.println("5. Mostrar Recorridos del Árbol");
+            System.out.println("6. Mostrar Recorridos del Grafo");
+            System.out.println("7. Salir");
             System.out.print("Seleccione una opción: ");
 
             try {
@@ -24,24 +23,27 @@ public class ArbolBinario {
 
                 switch (opcion) {
                     case 1 -> abb.insertar(capturarCiudad(scanner, "Ingrese el nombre de la ciudad: "));
-                    case 2 -> System.out.println("¿La ciudad existe? " + abb.buscar(capturarCiudad(scanner, "Ingrese el nombre de la ciudad a buscar: ")));
-                    case 3 -> abb.eliminar(capturarCiudad(scanner, "Ingrese el nombre de la ciudad a eliminar: "));
-                    case 4 -> mostrarRecorridos(abb, scanner);
-                    case 5 -> {
+                    case 2 -> abb.eliminar(capturarCiudad(scanner, "Ingrese el nombre de la ciudad a eliminar: "));
+                    case 3 -> {
                         String origen = capturarCiudad(scanner, "Ingrese el nombre de la ciudad origen: ");
                         String destino = capturarCiudad(scanner, "Ingrese el nombre de la ciudad destino: ");
                         abb.conectarCiudades(origen, destino);
                     }
-                    case 6 -> abb.mostrarRutas();
-                    case 7 -> abb.mostrarConexionesDeCiudad(capturarCiudad(scanner, "Ingrese el nombre de la ciudad: "));
-                    case 8 -> System.out.println("Saliste del programa....");
+                    case 4 -> {
+                        String origen = capturarCiudad(scanner, "Ingrese el nombre de la ciudad origen: ");
+                        String destino = capturarCiudad(scanner, "Ingrese el nombre de la ciudad destino: ");
+                        abb.eliminarRuta(origen, destino);
+                    }
+                    case 5 -> mostrarRecorridos(abb, scanner);
+                    case 6 -> mostrarRecorridosGrafo(abb, scanner);
+                    case 7 -> System.out.println("Saliste del programa....");
                     default -> System.out.println("Opción inválida.");
                 }
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
-                scanner.nextLine(); 
+                scanner.nextLine();
             }
-        } while (opcion != 8);
+        } while (opcion != 7);
 
         scanner.close();
     }
@@ -52,18 +54,23 @@ public class ArbolBinario {
     }
 
     private static void mostrarRecorridos(ArbolBinarioBusqueda abb, Scanner scanner) {
-        System.out.println("Seleccione el tipo de recorrido:");
-        System.out.println("1. Inorden");
-        System.out.println("2. Preorden");
+        System.out.println("Reccorridos en el Árbol:");
+        System.out.println("1. Preorden");
+        abb.recorrerPreorden();
+        System.out.println("2. Inorden");
+        abb.recorrerInOrden();
         System.out.println("3. Postorden");
-        int tipo = scanner.nextInt();
-        scanner.nextLine(); 
+        abb.recorrerPostorden();
+    }
 
-        switch (tipo) {
-            case 1 -> abb.recorrerInOrden();
-            case 2 -> abb.recorrerPreorden();
-            case 3 -> abb.recorrerPostorden();
-            default -> System.out.println("Opción inválida.");
-        }
+    private static void mostrarRecorridosGrafo(ArbolBinarioBusqueda abb, Scanner scanner) {
+        System.out.print("Ingrese la ciudad de inicio: ");
+        String ciudadInicio = scanner.nextLine();
+
+        System.out.println("Recorridos en el Grafo:");
+        System.out.println("1. DFS (Profundidad)");
+        abb.dfs(ciudadInicio);
+        System.out.println("2. BFS (Anchura)");
+        abb.bfs(ciudadInicio);
     }
 }

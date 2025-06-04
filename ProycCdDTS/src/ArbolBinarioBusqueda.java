@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Clase que implementa un Árbol Binario de Búsqueda para gestionar ciudades
@@ -12,6 +13,7 @@ public class ArbolBinarioBusqueda {
 
     /**
      * Constructor que inicializa el árbol y el grafo.
+     * 
      * @param numVertices Número máximo de ciudades (vértices) permitidas.
      */
     public ArbolBinarioBusqueda(int numVertices) {
@@ -51,6 +53,7 @@ public class ArbolBinarioBusqueda {
 
     /**
      * Busca si una ciudad existe en el árbol.
+     * 
      * @param valor Nombre de la ciudad.
      * @return true si existe, false si no.
      */
@@ -190,7 +193,7 @@ public class ArbolBinarioBusqueda {
         if (grafo.getMatrizAdyacencia()[indiceOrigen][indiceDestino] == 1) {
             throw new IllegalArgumentException("Las ciudades ya están conectadas.");
         }
-        grafo.agregarArista(indiceOrigen, indiceDestino); // Agrega la conexión en la matriz
+        grafo.agregarArista(indiceOrigen, indiceDestino);
     }
 
     /**
@@ -216,5 +219,53 @@ public class ArbolBinarioBusqueda {
                 System.out.println("Conectada con: " + nombre);
             }
         }
+    }
+
+    /**
+     * Elimina una ruta (arista) entre dos ciudades en el grafo.
+     * Lanza excepción si alguna ciudad no existe o no están conectadas.
+     */
+    public void eliminarRuta(String ciudadOrigen, String ciudadDestino) {
+        if (!ciudadIndice.containsKey(ciudadOrigen) || !ciudadIndice.containsKey(ciudadDestino)) {
+            System.out.println("Una o ambas ciudades no existen.");
+            return;
+        }
+        int indiceOrigen = ciudadIndice.get(ciudadOrigen);
+        int indiceDestino = ciudadIndice.get(ciudadDestino);
+        if (grafo.getMatrizAdyacencia()[indiceOrigen][indiceDestino] == 0) {
+            System.out.println("Las ciudades no están conectadas.");
+            return;
+        }
+        grafo.eliminarArista(indiceOrigen, indiceDestino);
+        System.out.println("Ruta eliminada correctamente entre " + ciudadOrigen + " y " + ciudadDestino + ".");
+    }
+
+    // Método para obtener el mapa de índices a nombres de ciudades
+    public Map<Integer, String> obtenerIndiceCiudad() {
+        Map<Integer, String> indiceCiudad = new HashMap<>();
+        for (Map.Entry<String, Integer> entry : ciudadIndice.entrySet()) {
+            indiceCiudad.put(entry.getValue(), entry.getKey());
+        }
+        return indiceCiudad;
+    }
+
+    public void dfs(String ciudadInicio) {
+        if (!ciudadIndice.containsKey(ciudadInicio)) {
+            System.out.println("La ciudad no existe.");
+            return;
+        }
+        int indice = ciudadIndice.get(ciudadInicio);
+        System.out.print("Recorrido DFS: ");
+        grafo.dfs(indice, obtenerIndiceCiudad());
+    }
+
+    public void bfs(String ciudadInicio) {
+        if (!ciudadIndice.containsKey(ciudadInicio)) {
+            System.out.println("La ciudad no existe.");
+            return;
+        }
+        int indice = ciudadIndice.get(ciudadInicio);
+        System.out.print("Recorrido BFS: ");
+        grafo.bfs(indice, obtenerIndiceCiudad());
     }
 }
