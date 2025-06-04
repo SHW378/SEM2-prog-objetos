@@ -28,4 +28,20 @@ public class GrafoMatriz {
         }
     }
 
+    public void dfs(int vertice) {
+        boolean[] visitado = new boolean[numVertices];
+        dfsRecursivo(vertice, visitado);
+    }
+
+    public void dfsRecursivo(int vertice, boolean[] visitados) {
+        if(!visitados[vertice]){
+            visitados[vertice] = true;
+            System.out.println(vertice + " "); 
+            for(int vecino = 0; vecino < numVertices; vecino++) {
+                if(matrizAdyacencia[vertice][vecino] == 1) {
+                    dfsRecursivo(vecino, visitados);
+                }
+            }
+        }
+    }
 }
