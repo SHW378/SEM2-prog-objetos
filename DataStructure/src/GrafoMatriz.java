@@ -44,4 +44,25 @@ public class GrafoMatriz {
             }
         }
     }
+
+    public void bfs(int vertice) {
+        boolean[] visitados = new boolean[numVertices];
+        int[] cola = new int[numVertices];
+        int frente = 0;
+        int fin = 0;
+        
+        visitados[vertice] = true;
+        cola[fin++] = vertice;
+
+        while(frente < fin) {
+            int actual = cola[frente++];
+            System.out.println(actual + " ");
+            for (int vecino = 0; vecino < numVertices; vecino++) {
+                if(matrizAdyacencia[actual][vecino] == 1 && !visitados[vecino]) {
+                    visitados[vecino] = true;
+                    cola[fin++] = vecino;
+                }
+            }    
+        }
+    }
 }
