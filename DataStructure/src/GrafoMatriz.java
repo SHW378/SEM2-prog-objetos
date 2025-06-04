@@ -36,7 +36,7 @@ public class GrafoMatriz {
     public void dfsRecursivo(int vertice, boolean[] visitados) {
         if(!visitados[vertice]){
             visitados[vertice] = true;
-            System.out.println(vertice + " "); 
+            System.out.print(vertice + " "); 
             for(int vecino = 0; vecino < numVertices; vecino++) {
                 if(matrizAdyacencia[vertice][vecino] == 1) {
                     dfsRecursivo(vecino, visitados);
@@ -56,7 +56,7 @@ public class GrafoMatriz {
 
         while(frente < fin) {
             int actual = cola[frente++];
-            System.out.println(actual + " ");
+            System.out.print(actual + " ");
             for (int vecino = 0; vecino < numVertices; vecino++) {
                 if(matrizAdyacencia[actual][vecino] == 1 && !visitados[vecino]) {
                     visitados[vecino] = true;
