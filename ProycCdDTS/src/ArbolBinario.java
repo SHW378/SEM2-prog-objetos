@@ -6,7 +6,8 @@ public class ArbolBinario {
         Scanner scanner = new Scanner(System.in);
         int opcion = 0;
 
-        do {
+        boolean continuar = false;
+        while (!continuar) {
             System.out.println("\nMenú de Gestión de Rutas de Transporte:");
             System.out.println("1. Agregar Ciudad");
             System.out.println("2. Eliminar Ciudad");
@@ -36,14 +37,21 @@ public class ArbolBinario {
                     }
                     case 5 -> mostrarRecorridos(abb, scanner);
                     case 6 -> mostrarRecorridosGrafo(abb, scanner);
-                    case 7 -> System.out.println("Saliste del programa....");
+                    case 7 -> {
+                        System.out.println("Saliendo del programa...");
+                        continuar = true;
+                    }
                     default -> System.out.println("Opción inválida.");
                 }
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
                 scanner.nextLine();
             }
-        } while (opcion != 7);
+            if (!continuar) {
+                System.out.println("\nPresione Enter para continuar...");
+                scanner.nextLine();
+            }
+        } 
 
         scanner.close();
     }
