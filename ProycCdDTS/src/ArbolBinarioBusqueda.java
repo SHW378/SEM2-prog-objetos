@@ -188,6 +188,9 @@ public class ArbolBinarioBusqueda {
         if (!buscar(ciudadOrigen) || !buscar(ciudadDestino)) {
             throw new IllegalArgumentException("Una o ambas ciudades no existen en el árbol.");
         }
+        if (ciudadOrigen.equals(ciudadDestino)) {
+            throw new IllegalArgumentException("No se puede conectar una ciudad consigo misma.");
+        }
         int indiceOrigen = ciudadIndice.get(ciudadOrigen);
         int indiceDestino = ciudadIndice.get(ciudadDestino);
         if (grafo.getMatrizAdyacencia()[indiceOrigen][indiceDestino] == 1) {
