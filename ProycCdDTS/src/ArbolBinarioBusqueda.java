@@ -36,6 +36,7 @@ public class ArbolBinarioBusqueda {
         }
         ciudadIndice.put(valor, indiceActual++);
         raiz = insertarRecursivamente(raiz, valor);
+        System.out.println("Ciudad agregada: " + valor);
     }
 
     // Inserta recursivamente un nodo en el árbol binario de búsqueda
@@ -197,6 +198,7 @@ public class ArbolBinarioBusqueda {
             throw new IllegalArgumentException("Las ciudades ya están conectadas.");
         }
         grafo.agregarArista(indiceOrigen, indiceDestino);
+        System.out.println("Ruta creada correctamente entre " + ciudadOrigen + " y " + ciudadDestino + ".");
     }
 
     /**
