@@ -123,7 +123,6 @@ public class ArbolBinarioBusqueda {
         return raiz;
     }
 
-    // Encuentra el valor mínimo (más a la izquierda) en un subárbol
     private String valorMinimo(Vertice raiz) {
         String valorMin = raiz.valor;
         while (raiz.izquierdo != null) {
@@ -141,7 +140,6 @@ public class ArbolBinarioBusqueda {
         System.out.println();
     }
 
-    // Recorrido inorden recursivo
     private void recorrerInOrdenRecursivamente(Vertice raiz) {
         if (raiz != null) {
             recorrerInOrdenRecursivamente(raiz.izquierdo);
@@ -158,7 +156,6 @@ public class ArbolBinarioBusqueda {
         System.out.println();
     }
 
-    // Recorrido preorden recursivo
     private void recorrerPreOrdenRecursivamente(Vertice raiz) {
         if (raiz != null) {
             System.out.print(raiz.valor + " ");
@@ -175,7 +172,6 @@ public class ArbolBinarioBusqueda {
         System.out.println();
     }
 
-    // Recorrido postorden recursivo
     private void recorrerPostOrdenRecursivamente(Vertice raiz) {
         if (raiz != null) {
             recorrerPostOrdenRecursivamente(raiz.izquierdo);
@@ -247,7 +243,7 @@ public class ArbolBinarioBusqueda {
         System.out.println("Ruta eliminada correctamente entre " + ciudadOrigen + " y " + ciudadDestino + ".");
     }
 
-    // Métodos auxiliares para manejar ciudades sin HashMap
+    
     private int obtenerIndiceCiudad(String nombre) {
         for (int i = 0; i < numCiudades; i++) {
             if (ciudades[i].equals(nombre)) return i;

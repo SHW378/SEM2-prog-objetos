@@ -2,15 +2,12 @@ import java.util.Scanner;
 
 public class ArbolBinario {
     public static void main(String[] args) {
-        // Crea el árbol binario de búsqueda y el grafo con capacidad para 10 ciudades
         ArbolBinarioBusqueda abb = new ArbolBinarioBusqueda(10);
         Scanner scanner = new Scanner(System.in);
         int opcion = 0;
         boolean continuar = false;
 
-        // Ciclo principal del menú interactivo
         while (!continuar) {
-            // Muestra el menú de opciones al usuario
             System.out.println("\nMenú de Gestión de Rutas de Transporte:");
             System.out.println("1. Agregar Ciudad");
             System.out.println("2. Eliminar Ciudad");
@@ -22,9 +19,8 @@ public class ArbolBinario {
             System.out.print("Seleccione una opción: ");
 
             try {
-                // Lee la opción del usuario
                 opcion = scanner.nextInt();
-                scanner.nextLine(); // Limpia el buffer
+                scanner.nextLine();
 
                 // Ejecuta la acción correspondiente según la opción elegida
                 switch (opcion) {
