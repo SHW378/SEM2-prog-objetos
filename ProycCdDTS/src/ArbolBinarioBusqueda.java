@@ -1,6 +1,3 @@
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Clase que implementa un Árbol Binario de Búsqueda para gestionar ciudades
  * y un grafo de adyacencia para gestionar las rutas entre ellas.
@@ -8,8 +5,8 @@ import java.util.Map;
 public class ArbolBinarioBusqueda {
     private Vertice raiz; // Raíz del árbol binario de búsqueda
     private GrafoMatriz grafo; // Grafo de adyacencia para las rutas
-    private HashMap<String, Integer> ciudadIndice; // Relaciona nombre de ciudad con su índice en la matriz
-    private int indiceActual; // Lleva el control del índice para nuevas ciudades
+    private String[] ciudades; // Arreglo de nombres de ciudades
+    private int numCiudades;   // Número actual de ciudades
 
     /**
      * Constructor que inicializa el árbol y el grafo.
@@ -19,8 +16,8 @@ public class ArbolBinarioBusqueda {
     public ArbolBinarioBusqueda(int numVertices) {
         raiz = null;
         grafo = new GrafoMatriz(numVertices);
-        ciudadIndice = new HashMap<>();
-        indiceActual = 0;
+        ciudades = new String[numVertices];
+        numCiudades = 0;
     }
 
     /**
@@ -31,10 +28,10 @@ public class ArbolBinarioBusqueda {
         if (buscar(valor)) {
             throw new IllegalArgumentException("La ciudad ya existe en el árbol.");
         }
-        if (indiceActual >= grafo.getNumVertices()) {
+        if (numCiudades >= grafo.getNumVertices()) {
             throw new IllegalArgumentException("No se pueden agregar más ciudades al grafo.");
         }
-        ciudadIndice.put(valor, indiceActual++);
+        ciudades[numCiudades++] = valor;
         raiz = insertarRecursivamente(raiz, valor);
         System.out.println("Ciudad agregada: " + valor);
     }
@@ -81,11 +78,17 @@ public class ArbolBinarioBusqueda {
      * Lanza excepción si la ciudad no existe.
      */
     public void eliminar(String valor) {
-        if (!buscar(valor)) {
+        int indice = obtenerIndiceCiudad(valor);
+        if (indice == -1) {
             throw new IllegalArgumentException("La ciudad no existe.");
         }
-        int indice = ciudadIndice.get(valor);
-        ciudadIndice.remove(valor);
+        // Elimina la ciudad del arreglo y recorre los elementos
+        for (int i = indice; i < numCiudades - 1; i++) {
+            ciudades[i] = ciudades[i + 1];
+        }
+        ciudades[numCiudades - 1] = null;
+        numCiudades--;
+
         raiz = eliminarRecursivamente(raiz, valor);
 
         // Elimina todas las conexiones de la ciudad en la matriz de adyacencia
@@ -186,14 +189,14 @@ public class ArbolBinarioBusqueda {
      * Lanza excepción si alguna ciudad no existe o ya están conectadas.
      */
     public void conectarCiudades(String ciudadOrigen, String ciudadDestino) {
-        if (!buscar(ciudadOrigen) || !buscar(ciudadDestino)) {
+        int indiceOrigen = obtenerIndiceCiudad(ciudadOrigen);
+        int indiceDestino = obtenerIndiceCiudad(ciudadDestino);
+        if (indiceOrigen == -1 || indiceDestino == -1) {
             throw new IllegalArgumentException("Una o ambas ciudades no existen en el árbol.");
         }
         if (ciudadOrigen.equals(ciudadDestino)) {
             throw new IllegalArgumentException("No se puede conectar una ciudad consigo misma.");
         }
-        int indiceOrigen = ciudadIndice.get(ciudadOrigen);
-        int indiceDestino = ciudadIndice.get(ciudadDestino);
         if (grafo.getMatrizAdyacencia()[indiceOrigen][indiceDestino] == 1) {
             throw new IllegalArgumentException("Las ciudades ya están conectadas.");
         }
@@ -213,15 +216,14 @@ public class ArbolBinarioBusqueda {
      * Lanza excepción si la ciudad no existe.
      */
     public void mostrarConexionesDeCiudad(String ciudad) {
-        if (!buscar(ciudad)) {
+        int indice = obtenerIndiceCiudad(ciudad);
+        if (indice == -1) {
             throw new IllegalArgumentException("La ciudad no existe.");
         }
-        int indice = ciudadIndice.get(ciudad);
         System.out.println("Conexiones de " + ciudad + ":");
-        for (String nombre : ciudadIndice.keySet()) {
-            int i = ciudadIndice.get(nombre);
+        for (int i = 0; i < numCiudades; i++) {
             if (grafo.getMatrizAdyacencia()[indice][i] == 1) {
-                System.out.println("Conectada con: " + nombre);
+                System.out.println("Conectada con: " + ciudades[i]);
             }
         }
     }
@@ -231,12 +233,12 @@ public class ArbolBinarioBusqueda {
      * Lanza excepción si alguna ciudad no existe o no están conectadas.
      */
     public void eliminarRuta(String ciudadOrigen, String ciudadDestino) {
-        if (!ciudadIndice.containsKey(ciudadOrigen) || !ciudadIndice.containsKey(ciudadDestino)) {
+        int indiceOrigen = obtenerIndiceCiudad(ciudadOrigen);
+        int indiceDestino = obtenerIndiceCiudad(ciudadDestino);
+        if (indiceOrigen == -1 || indiceDestino == -1) {
             System.out.println("Una o ambas ciudades no existen.");
             return;
         }
-        int indiceOrigen = ciudadIndice.get(ciudadOrigen);
-        int indiceDestino = ciudadIndice.get(ciudadDestino);
         if (grafo.getMatrizAdyacencia()[indiceOrigen][indiceDestino] == 0) {
             System.out.println("Las ciudades no están conectadas.");
             return;
@@ -245,32 +247,36 @@ public class ArbolBinarioBusqueda {
         System.out.println("Ruta eliminada correctamente entre " + ciudadOrigen + " y " + ciudadDestino + ".");
     }
 
-    // Método para obtener el mapa de índices a nombres de ciudades
-    public Map<Integer, String> obtenerIndiceCiudad() {
-        Map<Integer, String> indiceCiudad = new HashMap<>();
-        for (Map.Entry<String, Integer> entry : ciudadIndice.entrySet()) {
-            indiceCiudad.put(entry.getValue(), entry.getKey());
+    // Métodos auxiliares para manejar ciudades sin HashMap
+    private int obtenerIndiceCiudad(String nombre) {
+        for (int i = 0; i < numCiudades; i++) {
+            if (ciudades[i].equals(nombre)) return i;
         }
-        return indiceCiudad;
+        return -1;
+    }
+
+    public String getNombreCiudad(int indice) {
+        if (indice >= 0 && indice < numCiudades) return ciudades[indice];
+        return null;
     }
 
     public void dfs(String ciudadInicio) {
-        if (!ciudadIndice.containsKey(ciudadInicio)) {
+        int indice = obtenerIndiceCiudad(ciudadInicio);
+        if (indice == -1) {
             System.out.println("La ciudad no existe.");
             return;
         }
-        int indice = ciudadIndice.get(ciudadInicio);
         System.out.print("Recorrido DFS: ");
-        grafo.dfs(indice, obtenerIndiceCiudad());
+        grafo.dfs(indice, this);
     }
 
     public void bfs(String ciudadInicio) {
-        if (!ciudadIndice.containsKey(ciudadInicio)) {
+        int indice = obtenerIndiceCiudad(ciudadInicio);
+        if (indice == -1) {
             System.out.println("La ciudad no existe.");
             return;
         }
-        int indice = ciudadIndice.get(ciudadInicio);
         System.out.print("Recorrido BFS: ");
-        grafo.bfs(indice, obtenerIndiceCiudad());
+        grafo.bfs(indice, this);
     }
 }

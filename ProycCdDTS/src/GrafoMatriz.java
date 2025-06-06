@@ -1,5 +1,3 @@
-import java.util.Map;
-
 public class GrafoMatriz {
     private int[][] matrizAdyacencia;
     private int numVertices;
@@ -37,25 +35,26 @@ public class GrafoMatriz {
         }
     }
 
-    public void dfs(int vertice, Map<Integer, String> indiceCiudad) {
+    // Cambia la firma para recibir ArbolBinarioBusqueda y obtener nombres de ciudades
+    public void dfs(int vertice, ArbolBinarioBusqueda abb) {
         boolean[] visitado = new boolean[numVertices];
-        dfsRecursivo(vertice, visitado, indiceCiudad);
+        dfsRecursivo(vertice, visitado, abb);
         System.out.println();
     }
 
-    private void dfsRecursivo(int vertice, boolean[] visitados, Map<Integer, String> indiceCiudad) {
+    private void dfsRecursivo(int vertice, boolean[] visitados, ArbolBinarioBusqueda abb) {
         if (!visitados[vertice]) {
             visitados[vertice] = true;
-            System.out.print(indiceCiudad.get(vertice) + " ");
+            System.out.print(abb.getNombreCiudad(vertice) + " ");
             for (int vecino = 0; vecino < numVertices; vecino++) {
                 if (matrizAdyacencia[vertice][vecino] == 1) {
-                    dfsRecursivo(vecino, visitados, indiceCiudad);
+                    dfsRecursivo(vecino, visitados, abb);
                 }
             }
         }
     }
 
-    public void bfs(int vertice, Map<Integer, String> indiceCiudad) {
+    public void bfs(int vertice, ArbolBinarioBusqueda abb) {
         boolean[] visitados = new boolean[numVertices];
         int[] cola = new int[numVertices];
         int frente = 0;
@@ -66,7 +65,7 @@ public class GrafoMatriz {
 
         while (frente < fin) {
             int actual = cola[frente++];
-            System.out.print(indiceCiudad.get(actual) + " ");
+            System.out.print(abb.getNombreCiudad(actual) + " ");
             for (int vecino = 0; vecino < numVertices; vecino++) {
                 if (matrizAdyacencia[actual][vecino] == 1 && !visitados[vecino]) {
                     visitados[vecino] = true;
