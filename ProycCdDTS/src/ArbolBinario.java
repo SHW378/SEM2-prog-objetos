@@ -63,7 +63,7 @@ public class ArbolBinario {
             }
         } 
 
-        scanner.close(); // Cierra el scanner al terminar
+        scanner.close(); 
     }
 
     /**
