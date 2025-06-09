@@ -19,7 +19,7 @@ public class App {
             System.out.println("7: Ordenar con Heap Sort");
             System.out.println("8: Salir");
             System.out.print("Seleccione una opcion: ");
-            
+
             try {
 
                 opcion = sc.nextInt();
@@ -45,10 +45,10 @@ public class App {
                         continuar = true;
                     }
                     default ->
-                        System.out.println("Opcion no valida. Intente nuevamente.");
+                        System.out.println("Opcion no valida. Por favor Ingrese un valor entre 1-8");
                 }
             } catch (Exception e) {
-                System.out.println("Error: + " + e.getMessage());
+                System.out.println("Opcion no valida. Por favor Ingrese un valor entre 1-8");
                 sc.nextLine();
             }
             if (!continuar) {
