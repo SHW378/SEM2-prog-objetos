@@ -25,34 +25,18 @@ public class App {
                 sc.nextLine();
 
                 switch (opcion) {
-                    case 1:
-                        IngresarDatosManualmente(sc);
-                        break;
-                    case 2:
-                        generarDatosAleatorios(sc);
-                        break;
-                    case 3:
-                        BubbleSort(sc);
-                        break;
-                    case 4:
-                        SelectionSort(sc);
-                        break;
-                    case 5:
-                        InsertionSort(sc);
-                        break;
-                    case 6:
-                        QuickSort(sc);
-                        break;
-                    case 7:
-                        HeapSort(sc);
-                        break;
-                    case 8:
+                    case 1 -> MO.IngresarDatosManualmente(sc);
+                    case 2 -> MO.generarDatosAleatorios(sc);
+                    case 3 -> MO.BubbleSort(sc);
+                    case 4 -> MO.SelectionSort(sc);
+                    case 5 -> MO.InsertionSort(sc);
+                    case 6 -> MO.QuickSort(sc);
+                    case 7 -> MO.HeapSort(sc);
+                    case 8 -> {
                         System.out.println("Saliendo del programa..");
                         continuar = true;
-                        break;
-                    default:
-                        System.out.println("Opcion no valida. Intente nuevamente.");
-                        break;
+                    }
+                    default -> System.out.println("Opcion no valida. Intente nuevamente.");
                 }
             } catch (Exception e) {
                 System.out.println("Error: + " + e.getMessage());

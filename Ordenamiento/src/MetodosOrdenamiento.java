@@ -122,7 +122,7 @@ public class MetodosOrdenamiento {
         mostrarResultados("Quick Sort", arreglo, tiempoEjecucion);
     }
 
-    public void HeapSort() {
+    public void HeapSort(Scanner sc) {
         if (!validarArreglo()) {
             return;
         }
@@ -221,7 +221,7 @@ public class MetodosOrdenamiento {
         int pivot = arr[high];
         int i = (low - 1);
 
-        for(int j = low; j < high; j++){
+        for (int j = low; j < high; j++) {
             comparaciones++;
             if (arr[j] <= pivot) {
                 i++;
@@ -231,13 +231,13 @@ public class MetodosOrdenamiento {
         }
         intercambiar(arr, i + 1, high);
         intercambios++;
-        return i + 1; 
+        return i + 1;
     }
 
     private void heapSort(int[] arr) {
         int n = arr.length;
 
-        for(int i = n / 2 - 1; i >= 0; i--) {
+        for (int i = n / 2 - 1; i >= 0; i--) {
             heapify(arr, n, i);
         }
 
@@ -257,9 +257,9 @@ public class MetodosOrdenamiento {
             comparaciones++;
             if (arr[left] > arr[largest]) {
                 largest = left;
-            } 
+            }
         }
-        
+
         if (right < n) {
             comparaciones++;
             if (arr[right] > arr[largest]) {
