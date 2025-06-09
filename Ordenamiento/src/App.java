@@ -59,6 +59,6 @@ public class App {
                 sc.nextLine();
             } 
             } 
-        } sc.close();
+        } 
     }
 
