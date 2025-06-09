@@ -45,10 +45,10 @@ public class App {
                         continuar = true;
                     }
                     default ->
-                        System.out.println("Opcion no valida. Por favor Ingrese un valor entre 1-8");
+                        System.out.println("Opcion no valida. Intente de nuevo");
                 }
             } catch (Exception e) {
-                System.out.println("Opcion no valida. Por favor Ingrese un valor entre 1-8");
+                System.out.println("Opcion no valida. Intente de nuevo");
                 sc.nextLine();
             }
             if (!continuar) {
