@@ -45,10 +45,10 @@ public class App {
                         continuar = true;
                     }
                     default ->
-                        System.out.println("Opcion no valida. Intente de nuevo");
+                        System.out.println("Error: Opcion no valida. Intente de nuevo");
                 }
             } catch (Exception e) {
-                System.out.println("Opcion no valida. Intente de nuevo");
+                System.out.println("Error: Opcion no valida. Intente de nuevo");
                 sc.nextLine();
             }
             if (!continuar) {
