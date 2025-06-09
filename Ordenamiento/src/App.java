@@ -3,9 +3,8 @@ import java.util.Scanner;
 
 public class App {
 
-    private static MetodosOrdenamiento MO = new MetodosOrdenamiento();
-
     public static void main(String[] args) throws Exception {
+        MetodosOrdenamiento MO = new MetodosOrdenamiento();
         Scanner sc = new Scanner(System.in);
         int opcion;
         boolean continuar = false;
