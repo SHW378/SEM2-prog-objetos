@@ -1,13 +1,16 @@
-
 import java.util.*;
 
+// Clase que contiene los métodos de ordenamiento y manejo de datos
 public class MetodosOrdenamiento {
 
+    // Contadores para estadísticas
     private int comparaciones = 0;
     private int intercambios = 0;
 
+    // Arreglo actual sobre el que se trabaja
     private int[] arregloActual;
 
+    // Permite ingresar los datos manualmente por teclado
     public void IngresarDatosManualmente(Scanner sc) {
         System.out.println("Ingrese el tamaño del arreglo");
         int n = sc.nextInt();
@@ -22,6 +25,7 @@ public class MetodosOrdenamiento {
         System.out.println("Arreglo Ingresado: " + Arrays.toString(arregloActual));
     }
 
+    // Genera un arreglo de datos aleatorios
     public void generarDatosAleatorios(Scanner sc) {
         System.out.println("Ingrese el tamaño del arreglo: ");
         int n = sc.nextInt();
@@ -38,6 +42,7 @@ public class MetodosOrdenamiento {
         System.out.println("Arreglo generado aleatoriamente: " + Arrays.toString(arregloActual));
     }
 
+    // Verifica si el arreglo está listo para ser ordenado
     private boolean validarArreglo() {
         if (arregloActual == null || arregloActual.length == 0) {
             System.out.println("Error: No hay datos para ordenar. Primero ingrese o genere datos (opciones 1 o 2).");
@@ -46,6 +51,7 @@ public class MetodosOrdenamiento {
         return true;
     }
 
+    // Ordena usando Bubble Sort y muestra resultados
     public void BubbleSort(Scanner sc) {
         if (!validarArreglo()) {
             return;
@@ -65,6 +71,7 @@ public class MetodosOrdenamiento {
         mostrarResultados("Bubble Sort", arreglo, tiempoEjecucion);
     }
 
+    // Ordena usando Selection Sort y muestra resultados
     public void SelectionSort(Scanner sc) {
         if (!validarArreglo()) {
             return;
@@ -84,6 +91,7 @@ public class MetodosOrdenamiento {
         mostrarResultados("Selection Sort", arreglo, tiempoEjecucion);
     }
 
+    // Ordena usando Insertion Sort y muestra resultados
     public void InsertionSort(Scanner sc) {
         if (!validarArreglo()) {
             return;
@@ -103,12 +111,13 @@ public class MetodosOrdenamiento {
         mostrarResultados("Insertion Sort", arreglo, tiempoEjecucion);
     }
 
+    // Ordena usando Quick Sort y muestra resultados
     public void QuickSort(Scanner sc) {
         if (!validarArreglo()) {
             return;
         }
 
-        int[] arreglo = arregloActual.clone(); // Clonar para no modificar el original
+        int[] arreglo = arregloActual.clone();
         System.out.println("Arreglo antes de Quick Sort: " + Arrays.toString(arreglo));
 
         resetContadores();
@@ -122,12 +131,13 @@ public class MetodosOrdenamiento {
         mostrarResultados("Quick Sort", arreglo, tiempoEjecucion);
     }
 
+    // Ordena usando Heap Sort y muestra resultados
     public void HeapSort(Scanner sc) {
         if (!validarArreglo()) {
             return;
         }
 
-        int[] arreglo = arregloActual.clone(); // Clonar para no modificar el original
+        int[] arreglo = arregloActual.clone();
         System.out.println("Arreglo antes de Heap Sort: " + Arrays.toString(arreglo));
 
         resetContadores();
@@ -141,11 +151,13 @@ public class MetodosOrdenamiento {
         mostrarResultados("Heap Sort", arreglo, tiempoEjecucion);
     }
 
+    // Reinicia los contadores de comparaciones e intercambios
     private void resetContadores() {
         comparaciones = 0;
         intercambios = 0;
     }
 
+    // Muestra los resultados del algoritmo de ordenamiento
     private void mostrarResultados(String algoritmo, int[] arreglo, double tiempoEjecucion) {
         System.out.println("Arreglo después de " + algoritmo + ": " + Arrays.toString(arreglo));
         System.out.printf("Tiempo de ejecución: %.4f ms%n", tiempoEjecucion);
@@ -153,12 +165,14 @@ public class MetodosOrdenamiento {
         System.out.println("Intercambios: " + intercambios);
     }
 
+    // Intercambia dos elementos en un arreglo
     private void intercambiar(int[] arr, int i, int j) {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
 
+    // Implementación de Bubble Sort
     private void bubbleSort(int[] arr) {
         int n = arr.length;
         for (int i = 0; i < n - 1; i++) {
@@ -172,10 +186,11 @@ public class MetodosOrdenamiento {
         }
     }
 
+    // Implementación de Selection Sort
     private void selectionSort(int[] arr) {
         int n = arr.length;
         for (int i = 0; i < n - 1; i++) {
-            int minIdx = 1;
+            int minIdx = i;
             for (int j = i + 1; j < n; j++) {
                 comparaciones++;
                 if (arr[j] < arr[minIdx]) {
@@ -189,6 +204,7 @@ public class MetodosOrdenamiento {
         }
     }
 
+    // Implementación de Insertion Sort
     private void insertionSort(int[] arr) {
         int n = arr.length;
         for (int i = 1; i < n; i++) {
@@ -209,6 +225,7 @@ public class MetodosOrdenamiento {
         }
     }
 
+    // Implementación de Quick Sort
     private void quickSort(int[] arr, int low, int high) {
         if (low < high) {
             int pi = partition(arr, low, high);
@@ -217,6 +234,7 @@ public class MetodosOrdenamiento {
         }
     }
 
+    // Partición para Quick Sort
     private int partition(int[] arr, int low, int high) {
         int pivot = arr[high];
         int i = (low - 1);
@@ -234,13 +252,16 @@ public class MetodosOrdenamiento {
         return i + 1;
     }
 
+    // Implementación de Heap Sort
     private void heapSort(int[] arr) {
         int n = arr.length;
 
+        // Construir el heap (reorganizar el arreglo)
         for (int i = n / 2 - 1; i >= 0; i--) {
             heapify(arr, n, i);
         }
 
+        // Extraer elementos del heap uno por uno
         for (int i = n - 1; i > 0; i--) {
             intercambiar(arr, 0, i);
             intercambios++;
@@ -248,6 +269,7 @@ public class MetodosOrdenamiento {
         }
     }
 
+    // Mantiene la propiedad de heap
     private void heapify(int[] arr, int n, int i) {
         int largest = i;
         int left = 2 * i + 1;
