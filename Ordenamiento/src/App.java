@@ -1,9 +1,13 @@
+
 import java.util.Scanner;
 
 public class App {
+
+    private static MetodosOrdenamiento MO = new MetodosOrdenamiento();
+
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
-        int opcion = 0;
+        int opcion;
         boolean continuar = false;
 
         while (!continuar) {
@@ -16,7 +20,7 @@ public class App {
             System.out.println("7: Ordenar con Heap Sort");
             System.out.println("8: Salir");
 
-            try{
+            try {
                 opcion = sc.nextInt();
                 sc.nextLine();
 
@@ -24,29 +28,29 @@ public class App {
                     case 1:
                         IngresarDatosManualmente(sc);
                         break;
-                    case 2: 
+                    case 2:
                         generarDatosAleatorios(sc);
                         break;
                     case 3:
-                        ejecutarBubbleSort(sc);
+                        BubbleSort(sc);
                         break;
                     case 4:
                         SelectionSort(sc);
                         break;
-                    case 5: 
+                    case 5:
                         InsertionSort(sc);
                         break;
-                    case 6: 
+                    case 6:
                         QuickSort(sc);
                         break;
-                    case 7: 
+                    case 7:
                         HeapSort(sc);
                         break;
-                    case 8: 
+                    case 8:
                         System.out.println("Saliendo del programa..");
-                        continuar = true; 
+                        continuar = true;
                         break;
-                    default: 
+                    default:
                         System.out.println("Opcion no valida. Intente nuevamente.");
                         break;
                 }
@@ -57,8 +61,8 @@ public class App {
             if (!continuar) {
                 System.out.println("\nPresione Enter para continuar...");
                 sc.nextLine();
-            } 
-            } 
-        } 
+            }
+        }
+        sc.close();
     }
-
+}
