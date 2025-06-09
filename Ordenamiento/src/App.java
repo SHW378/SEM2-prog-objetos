@@ -18,24 +18,34 @@ public class App {
             System.out.println("6: Ordenar con Quick Sort");
             System.out.println("7: Ordenar con Heap Sort");
             System.out.println("8: Salir");
-
+            System.out.print("Seleccione una opcion: ");
+            
             try {
+
                 opcion = sc.nextInt();
                 sc.nextLine();
 
                 switch (opcion) {
-                    case 1 -> MO.IngresarDatosManualmente(sc);
-                    case 2 -> MO.generarDatosAleatorios(sc);
-                    case 3 -> MO.BubbleSort(sc);
-                    case 4 -> MO.SelectionSort(sc);
-                    case 5 -> MO.InsertionSort(sc);
-                    case 6 -> MO.QuickSort(sc);
-                    case 7 -> MO.HeapSort(sc);
+                    case 1 ->
+                        MO.IngresarDatosManualmente(sc);
+                    case 2 ->
+                        MO.generarDatosAleatorios(sc);
+                    case 3 ->
+                        MO.BubbleSort(sc);
+                    case 4 ->
+                        MO.SelectionSort(sc);
+                    case 5 ->
+                        MO.InsertionSort(sc);
+                    case 6 ->
+                        MO.QuickSort(sc);
+                    case 7 ->
+                        MO.HeapSort(sc);
                     case 8 -> {
                         System.out.println("Saliendo del programa..");
                         continuar = true;
                     }
-                    default -> System.out.println("Opcion no valida. Intente nuevamente.");
+                    default ->
+                        System.out.println("Opcion no valida. Intente nuevamente.");
                 }
             } catch (Exception e) {
                 System.out.println("Error: + " + e.getMessage());

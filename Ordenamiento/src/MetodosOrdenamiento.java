@@ -52,7 +52,7 @@ public class MetodosOrdenamiento {
         }
 
         int[] arreglo = arregloActual.clone();
-        System.out.println("Arreglo antes de bubble Sort: " + Arrays.toString(arreglo));
+        System.out.println("Arreglo antes de Bubble Sort: " + Arrays.toString(arreglo));
 
         resetContadores();
         long tiempoInicio = System.nanoTime();
