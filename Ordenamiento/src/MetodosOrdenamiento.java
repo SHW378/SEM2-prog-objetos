@@ -1,3 +1,4 @@
+
 import java.util.*;
 
 // Clase que contiene los métodos de ordenamiento y manejo de datos
@@ -40,15 +41,6 @@ public class MetodosOrdenamiento {
         }
 
         System.out.println("Arreglo generado aleatoriamente: " + Arrays.toString(arregloActual));
-    }
-
-    // Verifica si el arreglo está listo para ser ordenado
-    private boolean validarArreglo() {
-        if (arregloActual == null || arregloActual.length == 0) {
-            System.out.println("Error: No hay datos para ordenar. Primero ingrese o genere datos (opciones 1 o 2).");
-            return false;
-        }
-        return true;
     }
 
     // Ordena usando Bubble Sort y muestra resultados
@@ -149,6 +141,15 @@ public class MetodosOrdenamiento {
         double tiempoEjecucion = (tiempoFin - tiempoInicio) / 1_000_000.0;
 
         mostrarResultados("Heap Sort", arreglo, tiempoEjecucion);
+    }
+
+    // Verifica si el arreglo está listo para ser ordenado
+    private boolean validarArreglo() {
+        if (arregloActual == null || arregloActual.length == 0) {
+            System.out.println("Error: No hay datos para ordenar. Primero ingrese o genere datos (opciones 1 o 2).");
+            return false;
+        }
+        return true;
     }
 
     // Reinicia los contadores de comparaciones e intercambios
