@@ -159,6 +159,7 @@ public class MetodosOrdenamiento {
 
     // Muestra los resultados del algoritmo de ordenamiento
     private void mostrarResultados(String algoritmo, int[] arreglo, double tiempoEjecucion) {
+        System.out.println();
         System.out.println("Arreglo después de " + algoritmo + ": " + Arrays.toString(arreglo));
         System.out.printf("Tiempo de ejecución: %.4f ms%n", tiempoEjecucion);
         System.out.println("Comparaciones: " + comparaciones);

@@ -10,11 +10,12 @@ public class App {
             boolean continuar = false;
             
             while (!continuar) {
+                System.out.println("\n==== ALGORITMOS DE ORDENAMIENTO ====");
                 System.out.println("1: Ingresar datos manualmente");
                 System.out.println("2: Generar datos aleatorios");
                 System.out.println("3: Ordenar con Bubble Sort");
                 System.out.println("4: Ordenar con Selection Sort");
-                System.out.println("5: Ordenar con Isertation Sort");
+                System.out.println("5: Ordenar con Insertion Sort");
                 System.out.println("6: Ordenar con Quick Sort");
                 System.out.println("7: Ordenar con Heap Sort");
                 System.out.println("8: Salir");
