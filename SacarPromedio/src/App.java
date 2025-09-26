@@ -37,7 +37,8 @@ public class App {
             } while (decision.equals("s"));
             
             if (decision.equals("n")) {
-                System.out.println("Promedio: " + suma / cantidad);
+                double promedio = suma / cantidad;
+                System.out.printf("Promedio: %.2f%n", promedio);
             }
         }
     }
